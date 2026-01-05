@@ -1,121 +1,55 @@
-/* Container */
-.rpg-container-flow {
+/* Container Principal da Seção */
+.skill-tree-container {
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
-  /* IMPORTANTE: Garante que o título não cole no topo */
-  padding-top: 80px; 
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* Garante que o mouse funcione aqui */
+  pointer-events: auto; 
 }
 
-/* O React Flow precisa capturar cliques */
-.react-flow {
-  pointer-events: auto;
-}
-
-/* Título Estilizado */
+/* Título (Mantivemos o estilo estiloso) */
 .skill-tree-title {
   font-size: 3rem;
   font-weight: 800;
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: 40px;
-  
-  /* Gradiente Elegante */
   background: linear-gradient(to right, #c084fc, #ec4899);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  
-  /* Sombra sutil para destacar do fundo preto */
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
 }
 
-/* --- BADGES (Nós) --- */
-.skill-node-custom {
-  width: 100px;
-  height: 100px;
+/* O Tabuleiro (A imagem de fundo) */
+.tree-board {
+  width: 100%;
+  /* Limita a largura em telas gigantes para não ficar esticado demais */
+  max-width: 1100px; 
+  /* Mantém a proporção da imagem gerada (16:9) */
+  aspect-ratio: 16 / 9;
+  
+  /* Configuração do Background */
+  background-image: url('/images/skill-tree-bg.png');
+  background-size: contain; /* Garante que a imagem inteira apareça */
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Importante para posicionarmos as badges depois */
   position: relative;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Sombra para destacar do fundo preto da página */
+  filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
 }
 
-.badge-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.skill-node-custom img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  /* Estado normal: um pouco desaturado para elegância */
-  filter: grayscale(40%) brightness(0.9);
-  transition: all 0.4s ease;
-}
-
-/* Hover Effect: Badge "acende" */
-.skill-node-custom:hover {
-  transform: scale(1.2) translateY(-5px);
-  z-index: 10;
-}
-
-.skill-node-custom:hover img {
-  filter: 
-    grayscale(0%) 
-    brightness(1.1) 
-    drop-shadow(0 0 15px rgba(168, 85, 247, 0.6)); /* Brilho Roxo suave */
-}
-
-/* Nome da Skill (Tooltip) */
-.skill-name {
-  position: absolute;
-  bottom: -30px;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  pointer-events: none;
-}
-
-.skill-node-custom:hover .skill-name {
-  opacity: 1;
-}
-
-/* --- LINHAS (EDGES) ELEGANTES --- */
-
-/* Base da linha */
-.react-flow__edge-path {
-  stroke-width: 2; /* Linha fina e elegante */
-  stroke-linecap: round;
-  fill: none;
-}
-
-/* Classe específica que usamos no JS */
-.edge-elegant .react-flow__edge-path {
-  stroke: #64748b; /* Cinza ardósia (Slate-500) - Neutro e pro */
-  opacity: 0.6;
-  transition: all 0.5s ease;
-}
-
-/* Quando passa o mouse na ÁRVORE (não no nó), as linhas ficam mais visíveis?
-   Opcional. Por enquanto vamos deixar estático para ser limpo. */
-
-/* Esconde controles padrão */
-.react-flow__controls, .react-flow__attribution {
-    display: none;
+/* Responsividade */
+@media (max-width: 768px) {
+  .skill-tree-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
 }
