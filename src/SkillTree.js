@@ -18,29 +18,29 @@ const SkillTree = () => {
 
       {/* NÍVEL 4: INFRA E AUTOMAÇÃO */}
       <div className="tree-level">
-        <SkillNode name="Azure Cloud" imageSrc="/images/badges/azure.png" />
-        <SkillNode name="Docker" imageSrc="/images/badges/docker.png" />
-        <SkillNode name="n8n Automation" imageSrc="/images/badges/n8n.png" />
+        <SkillNode name="Azure Cloud" imageSrc="/badges/badgeazure.jpg" />
+        <SkillNode name="Docker" imageSrc="/badges/badgedocker.jpg" />
+        <SkillNode name="n8n Automation" imageSrc="/badges/badgen8n.jpg" />
       </div>
 
       {/* NÍVEL 3: FRAMEWORKS */}
       <div className="tree-level">
-        <SkillNode name="React" imageSrc="/images/badges/react.png" />
-        <SkillNode name=".NET Core" imageSrc="/images/badges/dotnet.png" />
+        <SkillNode name="React" imageSrc="/badges/badgereact.jpg" />
+        <SkillNode name=".NET Core" imageSrc="/badges/badgedotnet.jpg" />
       </div>
 
       {/* NÍVEL 2: LINGUAGENS */}
       <div className="tree-level">
-        <SkillNode name="TypeScript" imageSrc="/images/badges/typescript.png" />
-        <SkillNode name="C#" imageSrc="/images/badges/csharp.png" />
-        <SkillNode name="SQL" imageSrc="/images/badges/sql.png" />
+        <SkillNode name="TypeScript" imageSrc="/badges/badgetypescript.jpg" />
+        <SkillNode name="C#" imageSrc="/badges/badgecsharp.jpg" />
+        <SkillNode name="SQL" imageSrc="/badges/badgesql.jpg" />
       </div>
 
       {/* NÍVEL 1: FUNDAÇÃO */}
       <div className="tree-level">
-        <SkillNode name="HTML5" imageSrc="/images/badges/html.png" />
-        <SkillNode name="Git" imageSrc="/images/badges/git.png" />
-        <SkillNode name="CSS3" imageSrc="/images/badges/css.png" />
+        <SkillNode name="HTML5" imageSrc="/badges/badgehtml.jpg" />
+        <SkillNode name="Git" imageSrc="/badges/badgegit.jpg" />
+        <SkillNode name="CSS3" imageSrc="/badges/badgecss.jpg" />
       </div>
     </div>
   );
