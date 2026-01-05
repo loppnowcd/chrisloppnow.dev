@@ -72,26 +72,26 @@ const SkillTree = () => {
           }}>
           
           {/* LINHA 1: A Base */}
-          <div style={{ gridColumn: 1, gridRow: 1 }}> <SkillNode name="HTML5" imageSrc="/images/badges/badgehtml.png" /> </div>
-          <div style={{ gridColumn: 2, gridRow: 1 }}> <SkillNode name="CSS3" imageSrc="/images/badges/badgecss.png" /> </div>
-          <div style={{ gridColumn: 3, gridRow: 1 }}> <SkillNode name="JavaScript" imageSrc="/images/badges/badgejavascript.png" /> </div>
+          <div style={{ gridColumn: 1, gridRow: 1 }}> <SkillNode name="HTML5" imageSrc="badges/badgehtml.png" /> </div>
+          <div style={{ gridColumn: 2, gridRow: 1 }}> <SkillNode name="CSS3" imageSrc="badges/badgecss.png" /> </div>
+          <div style={{ gridColumn: 3, gridRow: 1 }}> <SkillNode name="JavaScript" imageSrc="badges/badgejavascript.png" /> </div>
 
           {/* LINHA 2: O Centro */}
-          <div style={{ gridColumn: 2, gridRow: 2 }}> <SkillNode name="Git" imageSrc="/images/badges/badgegit.png" /> </div>
-          <div style={{ gridColumn: 3, gridRow: 2 }}> <SkillNode name="SQL" imageSrc="/images/badges/badgesql.png" /> </div>
+          <div style={{ gridColumn: 2, gridRow: 2 }}> <SkillNode name="Git" imageSrc="badges/badgegit.png" /> </div>
+          <div style={{ gridColumn: 3, gridRow: 2 }}> <SkillNode name="SQL" imageSrc="badges/badgesql.png" /> </div>
 
           {/* LINHA 3: Back-end & Infra */}
-          <div style={{ gridColumn: 3, gridRow: 3 }}> <SkillNode name="C#" imageSrc="/images/badges/badgecsharp.png" /> </div>
-          <div style={{ gridColumn: 4, gridRow: 3 }}> <SkillNode name=".NET" imageSrc="/images/badges/badgedotnet.png" /> </div>
-          <div style={{ gridColumn: 5, gridRow: 3 }}> <SkillNode name="Docker" imageSrc="/images/badges/badgedocker.png" /> </div>
+          <div style={{ gridColumn: 3, gridRow: 3 }}> <SkillNode name="C#" imageSrc="badges/badgecsharp.png" /> </div>
+          <div style={{ gridColumn: 4, gridRow: 3 }}> <SkillNode name=".NET" imageSrc="badges/badgedotnet.png" /> </div>
+          <div style={{ gridColumn: 5, gridRow: 3 }}> <SkillNode name="Docker" imageSrc="badges/badgedocker.png" /> </div>
 
           {/* LINHA 4: Front-end Moderno */}
-          <div style={{ gridColumn: 5, gridRow: 4 }}> <SkillNode name="React" imageSrc="/images/badges/badgereact.png" /> </div>
-          <div style={{ gridColumn: 6, gridRow: 4 }}> <SkillNode name="TypeScript" imageSrc="/images/badges/badgetypescript.png" /> </div>
+          <div style={{ gridColumn: 5, gridRow: 4 }}> <SkillNode name="React" imageSrc="badges/badgereact.png" /> </div>
+          <div style={{ gridColumn: 6, gridRow: 4 }}> <SkillNode name="TypeScript" imageSrc="badges/badgetypescript.png" /> </div>
 
           {/* LINHA 5: Cloud & Automação */}
-          <div style={{ gridColumn: 5, gridRow: 5 }}> <SkillNode name="Azure" imageSrc="/images/badges/badgeazure.png" /> </div>
-          <div style={{ gridColumn: 6, gridRow: 5 }}> <SkillNode name="n8n" imageSrc="/images/badges/badgen8n.png" /> </div>
+          <div style={{ gridColumn: 5, gridRow: 5 }}> <SkillNode name="Azure" imageSrc="badges/badgeazure.png" /> </div>
+          <div style={{ gridColumn: 6, gridRow: 5 }}> <SkillNode name="n8n" imageSrc="badges/badgen8n.png" /> </div>
 
         </div>
       </div>
