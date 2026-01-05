@@ -34,7 +34,7 @@
   aspect-ratio: 16 / 9;
   
   /* Configuração do Background */
-  background-image: url('/images/background.jpg');
+  background-image: url('/images/badges/background.jpg');
   background-size: contain; /* Garante que a imagem inteira apareça */
   background-position: center;
   background-repeat: no-repeat;
