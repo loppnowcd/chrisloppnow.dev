@@ -1,120 +1,146 @@
-/* Container principal da árvore */
-.rpg-container {
+/* Container Horizontal */
+.rpg-container-horizontal {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: auto; /* Permite rolar horizontal se a tela for muito pequena */
 }
 
-/* Título estilizado */
 .rpg-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-transform: uppercase;
-  letter-spacing: 5px;
-  margin-bottom: 50px;
-  font-weight: bold;
-  /* Gradiente no texto */
-  background: linear-gradient(to right, #c084fc, #db2777); /* Roxo para Rosa */
+  letter-spacing: 6px;
+  margin-bottom: 60px;
+  background: linear-gradient(to right, #ffd700, #ffa500); /* Dourado RPG */
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
-/* Níveis da árvore (linhas horizontais) */
-.tree-level {
+/* O Grid da Árvore */
+.talent-tree-grid {
   display: flex;
-  justify-content: center;
-  gap: 30px; /* Espaço entre os ícones lado a lado */
+  flex-direction: row;
+  align-items: center; /* Centraliza verticalmente */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Colunas (Tier) */
+.tier-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* Espaço vertical entre badges da mesma coluna */
   position: relative;
-  margin-bottom: 45px; /* Espaço entre os andares */
 }
 
-/* Linha vertical de conexão entre os níveis */
-.tree-level:not(:last-child)::after {
-  content: '';
+.tier-title {
   position: absolute;
-  bottom: -30px; /* Estica a linha para baixo */
-  left: 50%;
-  width: 2px;
-  height: 30px;
-  background: linear-gradient(to bottom, #a855f7, #374151); /* Roxo sumindo para cinza */
-  transform: translateX(-50%);
-  z-index: 0;
+  top: -50px;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* O Card do Ícone (Badge) */
+.nodes-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* O Card da Badge - MAIOR AGORA */
 .skill-node {
   position: relative;
-  width: 80px; 
-  height: 80px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 100px;  /* Aumentei de 80 para 100 */
+  height: 100px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Imagem dentro do card */
+/* Imagem */
 .skill-node img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Começa um pouco apagado */
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5)) grayscale(30%);
-  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.8)) grayscale(40%);
+  transition: all 0.4s ease;
 }
 
-/* Efeito Hover (Quando passa o mouse) */
+/* Efeitos de Hover e Cores por Tier */
+.tier-1 .skill-node:hover img { filter: drop-shadow(0 0 20px #cd7f32) grayscale(0%); } /* Bronze */
+.tier-2 .skill-node:hover img { filter: drop-shadow(0 0 20px #c0c0c0) grayscale(0%); } /* Prata */
+.tier-3 .skill-node:hover img { filter: drop-shadow(0 0 20px #ffd700) grayscale(0%); } /* Ouro */
+
 .skill-node:hover {
-  transform: scale(1.25) translateY(-10px); /* Aumenta e sobe */
+  transform: scale(1.2);
+  z-index: 10;
 }
 
-.skill-node:hover img {
-  /* Brilha e fica colorido */
-  filter: drop-shadow(0 0 15px rgba(192, 132, 252, 0.6)) grayscale(0%);
+/* CONECTORES (As linhas horizontais) */
+.connector-column {
+  width: 80px; /* Comprimento da linha */
+  height: 300px; /* Altura da área de conexão */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
-/* Tooltip (O nome da skill que aparece embaixo) */
+.arrow-right {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+  position: relative;
+}
+
+/* Tooltip (Nome da Skill) */
 .skill-name {
   position: absolute;
-  bottom: -35px;
+  bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid #a855f7;
   color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  opacity: 0; /* Invisível por padrão */
+  font-size: 0.8rem;
+  font-weight: bold;
+  opacity: 0;
   white-space: nowrap;
   transition: opacity 0.3s;
+  text-shadow: 0 2px 4px rgba(0,0,0,1);
   pointer-events: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .skill-node:hover .skill-name {
-  opacity: 1; /* Aparece no hover */
+  opacity: 1;
 }
 
-/* Responsividade para telas menores (Celular) */
+/* MOBILE (Responsividade) */
 @media (max-width: 768px) {
-  .rpg-title {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+  .talent-tree-grid {
+    flex-direction: column; /* No celular vira vertical de novo pra caber */
+    gap: 40px;
   }
   
-  .tree-level {
-    gap: 15px;
-    margin-bottom: 35px;
+  .connector-column {
+    width: 2px;
+    height: 50px; /* Linha vertical */
+  }
+  
+  .arrow-right {
+    width: 2px;
+    height: 100%;
   }
 
-  .skill-node {
-    width: 60px;
-    height: 60px;
+  .tier-title {
+    position: relative;
+    top: 0;
+    margin-bottom: 10px;
   }
 }
