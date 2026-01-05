@@ -64,48 +64,48 @@ const SkillTree = () => {
           
           {/* NÓ INICIAL: Git */}
           <div style={{ gridColumn: 1, gridRow: 3 }}>
-             <SkillNode name="Git" imageSrc="/images/badges/badgegit.png" />
+             <SkillNode name="Git" imageSrc="/badges/badgegit.png" />
           </div>
 
           {/* NÓ CENTRAL: JavaScript */}
           <div style={{ gridColumn: 2, gridRow: 3 }}>
-            <SkillNode name="JavaScript" imageSrc="/images/badges/badgejavascript.png" />
+            <SkillNode name="JavaScript" imageSrc="/badges/badgejavascript.png" />
           </div>
 
           {/* --- RAMO SUPERIOR (Front-end) --- */}
           <div style={{ gridColumn: 3, gridRow: 1 }}>
-            <SkillNode name="HTML5" imageSrc="/images/badges/badgehtml.png" />
+            <SkillNode name="HTML5" imageSrc="/badges/badgehtml.png" />
           </div>
           <div style={{ gridColumn: 3, gridRow: 2 }}>
-            <SkillNode name="CSS3" imageSrc="/images/badges/badgecss.png" />
+            <SkillNode name="CSS3" imageSrc="/badges/badgecss.png" />
           </div>
           <div style={{ gridColumn: 4, gridRow: 1, gridRowSpan: 2, alignSelf: 'center' }}>
-            <SkillNode name="React" imageSrc="/images/badges/badgereact.png" />
+            <SkillNode name="React" imageSrc="/badges/badgereact.png" />
           </div>
 
           {/* --- RAMO DO MEIO (Core/Ferramentas) --- */}
           <div style={{ gridColumn: 3, gridRow: 3 }}>
-            <SkillNode name="TypeScript" imageSrc="/images/badges/badgetypescript.png" />
+            <SkillNode name="TypeScript" imageSrc="/badges/badgetypescript.png" />
           </div>
           <div style={{ gridColumn: 4, gridRow: 3 }}>
-            <SkillNode name="n8n" imageSrc="/images/badges/badgen8n.png" />
+            <SkillNode name="n8n" imageSrc="/badges/badgen8n.png" />
           </div>
           <div style={{ gridColumn: 5, gridRow: 3 }}>
-            <SkillNode name="Docker" imageSrc="/images/badges/badgedocker.png" />
+            <SkillNode name="Docker" imageSrc="/badges/badgedocker.png" />
           </div>
 
           {/* --- RAMO INFERIOR (Back-end) --- */}
           <div style={{ gridColumn: 3, gridRow: 4 }}>
-            <SkillNode name="SQL" imageSrc="/images/badges/badgesql.png" />
+            <SkillNode name="SQL" imageSrc="/badges/badgesql.png" />
           </div>
           <div style={{ gridColumn: 4, gridRow: 4 }}>
-            <SkillNode name="C#" imageSrc="/images/badges/badgecsharp.png" />
+            <SkillNode name="C#" imageSrc="/badges/badgecsharp.png" />
           </div>
           <div style={{ gridColumn: 5, gridRow: 4 }}>
-            <SkillNode name=".NET" imageSrc="/images/badges/badgedotnet.png" />
+            <SkillNode name=".NET" imageSrc="/badges/badgedotnet.png" />
           </div>
           <div style={{ gridColumn: 6, gridRow: 4 }}>
-            <SkillNode name="Azure" imageSrc="/images/badges/badgeazure.png" />
+            <SkillNode name="Azure" imageSrc="/badges/badgeazure.png" />
           </div>
 
         </div>
