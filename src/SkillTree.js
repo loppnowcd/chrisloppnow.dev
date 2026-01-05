@@ -1,99 +1,116 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import ReactFlow, { 
+  Background, 
+  Handle, 
+  Position,
+  MarkerType
+} from 'reactflow';
+import 'reactflow/dist/style.css'; // Importa estilos base obrigatórios
 import './SkillTree.css';
 
-// Componente da Badge (Sem alterações)
-const SkillNode = ({ name, imageSrc, style }) => (
-  <div className="skill-node" style={style}>
-    <div className="badge-wrapper">
-      {/* Usando .png para transparência */}
-      <img src={imageSrc} alt={name} />
-    </div>
-    <div className="skill-name">{name}</div>
-  </div>
-);
-
-const SkillTree = () => {
+// --- NÓ CUSTOMIZADO (A Badge) ---
+// O React Flow usa isso para renderizar cada item
+const BadgeNode = ({ data }) => {
   return (
-    <div className="rpg-container-horizontal">
-      <h2 className="rpg-title">Skill Tree</h2>
+    <div className="skill-node-custom">
+      {/* Handles são os pontos invisíveis onde as linhas conectam.
+          Colocamos um em cada lado para conexões flexíveis. */}
+      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
+      <Handle type="target" position={Position.Left} style={{ opacity: 0 }} />
+      
+      <div className="badge-wrapper">
+        <img src={data.imageSrc} alt={data.label} />
+      </div>
+      <div className="skill-name">{data.label}</div>
 
-      <div className="tree-wrapper">
-        {/* --- CAMADA DE CONEXÕES (SVG) --- 
-            Desenhando as linhas com base no novo layout.
-            Usei cores para diferenciar os caminhos.
-        */}
-        <svg className="connections-svg" width="100%" height="100%" viewBox="0 0 700 500" preserveAspectRatio="none">
-          
-          {/* CAMINHO DA BASE (Front-end Inicial) - AZUL */}
-          {/* HTML -> Git */}
-          <path d="M50 50 L 150 150" className="connection-line front-branch" />
-          {/* CSS -> Git */}
-          <path d="M150 50 L 150 150" className="connection-line front-branch" />
-          {/* JS -> Git */}
-          <path d="M250 50 L 150 150" className="connection-line front-branch" />
+      <Handle type="source" position={Position.Right} style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
+    </div>
+  );
+};
 
-          {/* CAMINHO DO BACK-END (A espinha dorsal) - ROXO */}
-          {/* Git -> SQL */}
-          <path d="M150 150 L 250 150" className="connection-line back-branch" />
-          {/* SQL -> C# */}
-          <path d="M250 150 L 250 250" className="connection-line back-branch" />
-          {/* C# -> .NET */}
-          <path d="M250 250 L 350 250" className="connection-line back-branch" />
 
-          {/* CAMINHO DA INFRA/MODERNO - LARANJA/CINZA */}
-          {/* .NET -> Docker */}
-          <path d="M350 250 L 450 250" className="connection-line core-branch" />
-          {/* Docker -> React */}
-          <path d="M450 250 L 450 350" className="connection-line core-branch" />
-          
-          {/* RAMIFICAÇÕES FINAIS */}
-          {/* React -> TypeScript (Volta pro Azul/Front) */}
-          <path d="M450 350 L 550 350" className="connection-line front-branch" />
-          {/* React -> Azure (Infra) */}
-          <path d="M450 350 L 450 450" className="connection-line core-branch" />
-          {/* Azure -> n8n (Automação) */}
-          <path d="M450 450 L 550 450" className="connection-line core-branch" />
+// --- CONFIGURAÇÃO DA ÁRVORE ---
+const SkillTree = () => {
+  // Define o tipo de nó customizado que criamos acima
+  const nodeTypes = useMemo(() => ({ badge: BadgeNode }), []);
 
-        </svg>
+  // --- DEFINIÇÃO DOS NÓS (Posições X/Y baseadas no seu diagrama) ---
+  const nodes = [
+    // LINHA 1 (Topo)
+    { id: 'html', type: 'badge', position: { x: 0, y: 0 }, data: { label: 'HTML5', imageSrc: '/images/badges/badgehtml.png' } },
+    { id: 'css', type: 'badge', position: { x: 150, y: 0 }, data: { label: 'CSS3', imageSrc: '/images/badges/badgecss.png' } },
+    { id: 'js', type: 'badge', position: { x: 300, y: 0 }, data: { label: 'JavaScript', imageSrc: '/images/badges/badgejavascript.png' } },
+    
+    // LINHA 2 (Git e SQL)
+    { id: 'git', type: 'badge', position: { x: 150, y: 150 }, data: { label: 'Git', imageSrc: '/images/badges/badgegit.png' } },
+    { id: 'sql', type: 'badge', position: { x: 350, y: 150 }, data: { label: 'SQL', imageSrc: '/images/badges/badgesql.png' } },
+    
+    // LINHA 3 (C#)
+    { id: 'csharp', type: 'badge', position: { x: 350, y: 300 }, data: { label: 'C#', imageSrc: '/images/badges/badgecsharp.png' } },
+    
+    // LINHA 4 (.NET e Docker)
+    { id: 'dotnet', type: 'badge', position: { x: 500, y: 300 }, data: { label: '.NET', imageSrc: '/images/badges/badgedotnet.png' } },
+    { id: 'docker', type: 'badge', position: { x: 700, y: 300 }, data: { label: 'Docker', imageSrc: '/images/badges/badgedocker.png' } },
+    
+    // LINHA 5 (React e TS)
+    { id: 'react', type: 'badge', position: { x: 700, y: 450 }, data: { label: 'React', imageSrc: '/images/badges/badgereact.png' } },
+    { id: 'ts', type: 'badge', position: { x: 900, y: 450 }, data: { label: 'TypeScript', imageSrc: '/images/badges/badgetypescript.png' } },
 
-        {/* --- O GRID DE POSICIONAMENTO --- 
-            Mapeando cada badge para sua posição no desenho.
-        */}
-        <div className="nodes-grid" style={{ 
-            display: 'grid', 
-            // Grid de 7x5 para caber o layout novo
-            gridTemplateColumns: 'repeat(7, 1fr)', 
-            gridTemplateRows: 'repeat(5, 1fr)', 
-            width: '100%', 
-            maxWidth: '1000px',
-            height: '500px',
-            // Pequeno ajuste para alinhar os nós com as pontas das linhas SVG
-            padding: '20px 0'
-          }}>
-          
-          {/* LINHA 1: A Base */}
-          <div style={{ gridColumn: 1, gridRow: 1 }}> <SkillNode name="HTML5" imageSrc="badges/badgehtml.png" /> </div>
-          <div style={{ gridColumn: 2, gridRow: 1 }}> <SkillNode name="CSS3" imageSrc="badges/badgecss.png" /> </div>
-          <div style={{ gridColumn: 3, gridRow: 1 }}> <SkillNode name="JavaScript" imageSrc="badges/badgejavascript.png" /> </div>
+    // LINHA 6 (Azure e n8n)
+    { id: 'azure', type: 'badge', position: { x: 700, y: 600 }, data: { label: 'Azure', imageSrc: '/images/badges/badgeazure.png' } },
+    { id: 'n8n', type: 'badge', position: { x: 900, y: 600 }, data: { label: 'n8n', imageSrc: '/images/badges/badgen8n.png' } },
+  ];
 
-          {/* LINHA 2: O Centro */}
-          <div style={{ gridColumn: 2, gridRow: 2 }}> <SkillNode name="Git" imageSrc="badges/badgegit.png" /> </div>
-          <div style={{ gridColumn: 3, gridRow: 2 }}> <SkillNode name="SQL" imageSrc="badges/badgesql.png" /> </div>
 
-          {/* LINHA 3: Back-end & Infra */}
-          <div style={{ gridColumn: 3, gridRow: 3 }}> <SkillNode name="C#" imageSrc="badges/badgecsharp.png" /> </div>
-          <div style={{ gridColumn: 4, gridRow: 3 }}> <SkillNode name=".NET" imageSrc="badges/badgedotnet.png" /> </div>
-          <div style={{ gridColumn: 5, gridRow: 3 }}> <SkillNode name="Docker" imageSrc="badges/badgedocker.png" /> </div>
+  // --- DEFINIÇÃO DAS CONEXÕES (Cabos de Energia) ---
+  // Usamos 'className' para definir a cor do cabo (azul, roxo, laranja)
+  // type: 'smoothstep' cria aquelas linhas com curvas suaves e ângulos retos, estilo diagrama técnico.
+  const edges = [
+    // Caminho Azul (Front Base)
+    { id: 'e-html-git', source: 'html', target: 'git', type: 'smoothstep', className: 'edge-blue' },
+    { id: 'e-css-git', source: 'css', target: 'git', type: 'smoothstep', className: 'edge-blue' },
+    { id: 'e-js-git', source: 'js', target: 'git', type: 'smoothstep', className: 'edge-blue' },
 
-          {/* LINHA 4: Front-end Moderno */}
-          <div style={{ gridColumn: 5, gridRow: 4 }}> <SkillNode name="React" imageSrc="badges/badgereact.png" /> </div>
-          <div style={{ gridColumn: 6, gridRow: 4 }}> <SkillNode name="TypeScript" imageSrc="badges/badgetypescript.png" /> </div>
+    // Caminho Roxo (Back-end)
+    { id: 'e-git-sql', source: 'git', target: 'sql', type: 'smoothstep', className: 'edge-purple' },
+    { id: 'e-sql-csharp', source: 'sql', target: 'csharp', type: 'smoothstep', className: 'edge-purple' },
+    { id: 'e-csharp-dotnet', source: 'csharp', target: 'dotnet', type: 'smoothstep', className: 'edge-purple' },
 
-          {/* LINHA 5: Cloud & Automação */}
-          <div style={{ gridColumn: 5, gridRow: 5 }}> <SkillNode name="Azure" imageSrc="badges/badgeazure.png" /> </div>
-          <div style={{ gridColumn: 6, gridRow: 5 }}> <SkillNode name="n8n" imageSrc="badges/badgen8n.png" /> </div>
+    // Caminho Laranja (Conexões Infra/Moderno)
+    { id: 'e-dotnet-docker', source: 'dotnet', target: 'docker', type: 'smoothstep', className: 'edge-orange' },
+    { id: 'e-docker-react', source: 'docker', target: 'react', type: 'smoothstep', className: 'edge-orange' },
 
-        </div>
+    // Ramificações Finais
+    { id: 'e-react-ts', source: 'react', target: 'ts', type: 'smoothstep', className: 'edge-blue' },
+    { id: 'e-react-azure', source: 'react', target: 'azure', type: 'smoothstep', className: 'edge-orange' },
+    { id: 'e-azure-n8n', source: 'azure', target: 'n8n', type: 'smoothstep', className: 'edge-orange' },
+  ];
+
+
+  return (
+    <div className="rpg-container-flow">
+      {/* O Título fica fora do fluxo */}
+      <h2 className="text-4xl font-bold mb-8 text-center uppercase tracking-widest bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent filter drop-shadow-lg">
+        Skill Tree
+      </h2>
+      
+      {/* O Componente Principal do React Flow */}
+      <div style={{ width: '100%', height: '80vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          nodeTypes={nodeTypes}
+          fitView // Centraliza e dá zoom automaticamente para caber tudo
+          attributionPosition="bottom-right"
+          nodesDraggable={false} // Trava os nós para o usuário não bagunçar
+          nodesConnectable={false}
+          zoomOnScroll={false} // Desabilita zoom com scroll para não atrapalhar a navegação da página
+          panOnScroll={false}
+        >
+          {/* Opcional: Adiciona um fundo de grid sutil */}
+          <Background color="#444" gap={20} size={1} />
+        </ReactFlow>
       </div>
     </div>
   );
