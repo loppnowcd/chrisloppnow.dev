@@ -6,21 +6,21 @@ import './SkillTree.css';
 
 const skills = [
 
-  { id: 'html', name: 'HTML5', src: '/images/badges/badgehtml.png', left: '12%', top: '50%' },
-  { id: 'css', name: 'CSS3', src: '/images/badges/badgecss.png', left: '19%', top: '50%' },
-  { id: 'js', name: 'JavaScript', src: '/images/badges/badgejavascript.png', left: '26%', top: '30%' },
-  { id: 'git', name: 'Git', src: '/images/badges/badgegit.png', left: '26%', top: '70%' },
+  { id: 'html', name: 'HTML5', src: '/images/badges/badgehtml.png', left: '9.3%', top: '50%' },
+  { id: 'css', name: 'CSS3', src: '/images/badges/badgecss.png', left: '36%', top: '29%' },
+  { id: 'js', name: 'JavaScript', src: '/images/badges/badgejavascript.png', left: '36%', top: '71%' },
+  { id: 'git', name: 'Git', src: '/images/badges/badgegit.png', left: '22.9%', top: '50%' },
   
-  { id: 'sql', name: 'SQL', src: '/images/badges/badgesql.png', left: '40%', top: '50%' },
-  { id: 'csharp', name: 'C#', src: '/images/badges/badgecsharp.png', left: '55%', top: '30%' },
-  { id: 'dotnet', name: '.NET', src: '/images/badges/badgedotnet.png', left: '55%', top: '70%' },
+  { id: 'sql', name: 'SQL', src: '/images/badges/badgesql.png', left: '36.3%', top: '50%' },
+  { id: 'csharp', name: 'C#', src: '/images/badges/badgecsharp.png', left: '50%', top: '50%' },
+  { id: 'dotnet', name: '.NET', src: '/images/badges/badgedotnet.png', left: '63.5%', top: '70.5%' },
   
-  { id: 'docker', name: 'Docker', src: '/images/badges/badgedocker.png', left: '70%', top: '30%' },
-  { id: 'react', name: 'React', src: '/images/badges/badgereact.png', left: '70%', top: '50%' },
-  { id: 'ts', name: 'TypeScript', src: '/images/badges/badgetypescript.png', left: '70%', top: '70%' },
+  { id: 'docker', name: 'Docker', src: '/images/badges/badgedocker.png', left: '63.5%', top: '30%' },
+  { id: 'react', name: 'React', src: '/images/badges/badgereact.png', left: '63.5%', top: '50%' },
+  { id: 'ts', name: 'TypeScript', src: '/images/badges/badgetypescript.png', left: '77%', top: '50%' },
   
-  { id: 'azure', name: 'Azure', src: '/images/badges/badgeazure.png', left: '85%', top: '40%' },
-  { id: 'n8n', name: 'n8n', src: '/images/badges/badgen8n.png', left: '85%', top: '60%' },
+  { id: 'azure', name: 'Azure', src: '/images/badges/badgeazure.png', left: '77%', top: '70.5%' },
+  { id: 'n8n', name: 'n8n', src: '/images/badges/badgen8n.png', left: '90.5%', top: '49.5%' },
 ];
 
 const SkillTree = () => {
