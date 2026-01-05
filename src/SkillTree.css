@@ -1,13 +1,19 @@
-/* Container para o React Flow */
+/* Container */
 .rpg-container-flow {
   width: 100%;
-  height: 100%; /* Ocupa a tela toda */
-  background-color: transparent;
+  height: 100%;
+  background-color: transparent; /* Sem fundo, pega o preto da div pai */
   font-family: 'Segoe UI', Tahoma, sans-serif;
+  /* Garante que o scroll passe mesmo se o mouse estiver nas bordas */
+  pointer-events: none; 
 }
 
-/* --- ESTILO DAS BADGES (Nós Customizados) --- */
-/* Mantemos o estilo que já funcionava bem */
+/* Reativa cliques apenas dentro do ReactFlow (para tooltips funcionarem no futuro) */
+.react-flow {
+  pointer-events: auto;
+}
+
+/* --- BADGES --- */
 .skill-node-custom {
   width: 100px;
   height: 100px;
@@ -33,7 +39,7 @@
   height: 100%;
   object-fit: contain;
   filter: grayscale(80%) brightness(0.7);
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
 }
 
 .skill-node-custom:hover {
@@ -44,9 +50,9 @@
 .skill-node-custom:hover img {
   filter: 
     grayscale(0%) 
-    brightness(1.1) 
-    drop-shadow(0 0 8px rgba(192, 132, 252, 0.9))
-    drop-shadow(0 0 15px rgba(236, 72, 153, 0.7));
+    brightness(1.2) 
+    drop-shadow(0 0 10px rgba(192, 132, 252, 0.9))
+    drop-shadow(0 0 20px rgba(236, 72, 153, 0.7));
 }
 
 .skill-name {
@@ -70,46 +76,51 @@
   opacity: 1;
 }
 
-/* --- CABOS DE ENERGIA (Edges Customizadas) --- */
+/* --- NOVOS CONECTORES FLUIDOS --- */
 
-/* Animação do fluxo de energia */
-@keyframes dashdraw {
-  from { stroke-dashoffset: 20; }
-  to { stroke-dashoffset: 0; }
-}
-
-/* Estilo base do cabo */
+/* Base para todas as linhas */
 .react-flow__edge-path {
-  stroke-width: 3;
+  stroke-width: 4; /* Linha mais grossa para parecer um tubo de energia */
   stroke-linecap: round;
   fill: none;
+  transition: stroke 0.5s ease; /* Suaviza mudanças */
 }
 
-/* Cabo Azul (Front) */
-.edge-blue .react-flow__edge-path {
-  stroke: #3b82f6;
-  filter: drop-shadow(0 0 5px #3b82f6);
-  stroke-dasharray: 5 5; /* Cria o pontilhado para animar */
-  animation: dashdraw 0.5s linear infinite;
+/* Animação de Pulsação de Cor (Alternância) */
+@keyframes pulseBluePurple {
+  0% { stroke: #3b82f6; filter: drop-shadow(0 0 3px #3b82f6); }
+  50% { stroke: #8b5cf6; filter: drop-shadow(0 0 8px #8b5cf6); } /* Brilha mais no meio */
+  100% { stroke: #3b82f6; filter: drop-shadow(0 0 3px #3b82f6); }
 }
 
-/* Cabo Roxo (Back) */
-.edge-purple .react-flow__edge-path {
-  stroke: #a855f7;
-  filter: drop-shadow(0 0 5px #a855f7);
-  stroke-dasharray: 5 5;
-  animation: dashdraw 0.5s linear infinite;
+@keyframes pulsePurplePink {
+  0% { stroke: #a855f7; filter: drop-shadow(0 0 3px #a855f7); }
+  50% { stroke: #ec4899; filter: drop-shadow(0 0 8px #ec4899); }
+  100% { stroke: #a855f7; filter: drop-shadow(0 0 3px #a855f7); }
 }
 
-/* Cabo Laranja/Core (Infra) */
-.edge-orange .react-flow__edge-path {
-  stroke: #f97316;
-  filter: drop-shadow(0 0 5px #f97316);
-  stroke-dasharray: 5 5;
-  animation: dashdraw 0.5s linear infinite;
+@keyframes pulseOrangeRed {
+  0% { stroke: #f97316; filter: drop-shadow(0 0 3px #f97316); }
+  50% { stroke: #ef4444; filter: drop-shadow(0 0 8px #ef4444); }
+  100% { stroke: #f97316; filter: drop-shadow(0 0 3px #f97316); }
 }
 
-/* Remove controles padrão do React Flow que não precisamos */
+/* Aplicação das animações nas classes */
+.edge-fluid-blue .react-flow__edge-path {
+  animation: pulseBluePurple 4s infinite ease-in-out; /* Lento e fluido */
+}
+
+.edge-fluid-purple .react-flow__edge-path {
+  animation: pulsePurplePink 4s infinite ease-in-out;
+  animation-delay: 1s; /* Descompasso para parecer orgânico */
+}
+
+.edge-fluid-orange .react-flow__edge-path {
+  animation: pulseOrangeRed 4s infinite ease-in-out;
+  animation-delay: 2s;
+}
+
+/* Esconde controles padrão do React Flow */
 .react-flow__controls, .react-flow__attribution {
     display: none;
 }
