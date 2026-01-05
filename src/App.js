@@ -1,17 +1,13 @@
 import React from 'react';
 import PhotoFrame from './PhotoFrame';
-import SkillTree from './SkillTree'; // Importando a nova árvore
+import SkillTree from './SkillTree';
 
 function App() {
   return (
     // CONTAINER PRINCIPAL COM SCROLL SNAP
-    // h-screen: Altura total da tela
-    // overflow-y-scroll: Permite rolar
-    // snap-y: Rolagem magnética vertical
-    // snap-mandatory: Obriga a parar sempre em um ponto de início (snap-start)
     <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       
-      {/* SEÇÃO 1: HERO */}
+      {/* SEÇÃO 1: HERO (1º lugar) */}
       <section className="h-screen w-full snap-start flex items-center justify-center px-4 relative">
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-8 items-center">
           
@@ -52,7 +48,13 @@ function App() {
         </div>
       </section>
 
-      {/* SEÇÃO 2: PROJETOS */}
+      {/* SEÇÃO 2: SKILL TREE (Agora em 2º lugar) */}
+      {/* MUDANÇA AQUI: bg-gray-900 virou bg-black */}
+      <section className="h-screen w-full snap-start bg-black flex items-center justify-center overflow-hidden">
+        <SkillTree />
+      </section>
+
+      {/* SEÇÃO 3: PROJETOS (Agora em 3º lugar) */}
       <section className="h-screen w-full snap-start flex flex-col justify-center px-4 bg-black">
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-4xl font-bold mb-12 text-center text-purple-400">Projetos</h2>
@@ -85,13 +87,7 @@ function App() {
         </div>
       </section>
 
-      {/* SEÇÃO 3: SKILL TREE (NOVA) */}
-      <section className="h-screen w-full snap-start bg-gray-900 flex items-center justify-center overflow-hidden">
-        {/* Aqui entra sua nova árvore de habilidades */}
-        <SkillTree />
-      </section>
-
-      {/* SEÇÃO 4: FOOTER/CONTATO */}
+      {/* SEÇÃO 4: FOOTER/CONTATO (Último lugar) */}
       <section className="h-screen w-full snap-start flex flex-col items-center justify-center px-4 bg-black">
         <div className="text-center">
           <h2 className="text-4xl font-bold mb-6 text-white">Vamos Conversar?</h2>
