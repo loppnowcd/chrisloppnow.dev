@@ -1,4 +1,5 @@
-/* Container e Título (Mantidos do passo anterior) */
+/* src/SkillTree.css */
+
 .skill-tree-container {
   width: 100%;
   height: 100%;
@@ -6,43 +7,49 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px 20px; /* Um pouco mais de respiro em cima e embaixo */
   pointer-events: auto;
 }
 
+/* --- NOVO ESTILO DO TÍTULO (Igual à Div 1) --- */
 .skill-tree-title {
-  font-family: inherit; 
-  font-size: 2.5rem; /* Tamanho padrão de H2 antes era font-size: 3rem;*/
-  font-weight: 700;  /* Negrito padrão antes era font-weight: 800;*/
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: 40px;
-  background: linear-gradient(to right, #c084fc, #ec4899);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+  font-size: 3rem; /* Tamanho grande e impactante */
+  font-weight: 800;  /* Negrito forte */
+  color: #ffffff;    /* Cor base branca */
+  text-align: center;
+  margin-bottom: 50px; /* Mais espaço entre o título e a árvore */
+  text-transform: none; /* Remove o uppercase forçado */
+  letter-spacing: 0.05em;
+  font-family: inherit; /* Usa a mesma fonte do resto do site */
 }
 
-/* O Tabuleiro */
+/* A palavra "técnicas" em destaque (Roxo/Rosa da Div 1) */
+.skill-tree-title .highlight {
+  color: #a855f7; /* Um roxo vibrante (ajuste se não for a cor exata) */
+}
+
+/* --- O TABULEIRO (AUMENTO DE TAMANHO) --- */
 .tree-board {
   width: 100%;
-  max-width: 1100px;
+  /* AQUI ESTÁ O AUMENTO! De 1100px para 1350px (~20%) */
+  max-width: 1350px;
   aspect-ratio: 16 / 9;
-  /* Imagem definida no JS inline */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  position: relative; /* Crucial para o absolute funcionar dentro dele */
+  position: relative;
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+  /* Uma transição suave caso a tela mude de tamanho */
+  transition: max-width 0.3s ease;
 }
 
-/* --- AS BADGES (POSICIONAMENTO) --- */
+/* --- AS BADGES (Crescem junto com o tabuleiro) --- */
 .skill-badge-wrapper {
   position: absolute;
-  width: 9%;  /* Tamanho relativo ao tabuleiro. Ajuste se achar pequeno/grande */
-  aspect-ratio: 1 / 1; /* Mantém quadrado */
-  transform: translate(-50%, -50%); /* Centraliza exato no ponto X/Y */
+  /* O tamanho delas é % do tabuleiro, então crescem automaticamente */
+  width: 8.8%; 
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
   cursor: pointer;
   z-index: 10;
   display: flex;
@@ -50,58 +57,54 @@
   justify-content: center;
 }
 
-/* --- A BADGE (VISUAL & AURA) --- */
+/* Resto dos estilos (hover, tooltip) permanecem iguais... */
 .skill-badge-inner {
   width: 100%;
   height: 100%;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .skill-badge-inner img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Estado normal: um pouco escuro para parecer inativo/encaixado */
-  filter: grayscale(30%) brightness(0.8);
+  filter: grayscale(40%) brightness(0.7) contrast(1.2);
   transition: all 0.3s ease;
 }
-
-/* HOVER EFFECT */
 .skill-badge-wrapper:hover .skill-badge-inner {
-  transform: scale(1.3); /* Cresce */
+  transform: scale(1.35);
+  z-index: 20;
 }
-
 .skill-badge-wrapper:hover img {
-  filter: 
-    grayscale(0%) 
-    brightness(1.2) 
-    drop-shadow(0 0 10px rgba(192, 132, 252, 0.8))
-    drop-shadow(0 0 20px rgba(236, 72, 153, 0.6));
+  filter: grayscale(0%) brightness(1.1) contrast(1) drop-shadow(0 0 15px rgba(192, 132, 252, 0.9)) drop-shadow(0 0 30px rgba(236, 72, 153, 0.7));
 }
-
-/* TOOLTIP (NOME) */
 .skill-tooltip {
   position: absolute;
-  bottom: -30px;
-  background: rgba(0, 0, 0, 0.8);
+  bottom: -35px;
+  background: rgba(0, 0, 0, 0.9);
   color: #e9d5ff;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
   white-space: nowrap;
   border: 1px solid #a855f7;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateY(10px);
 }
-
 .skill-badge-wrapper:hover .skill-tooltip {
   opacity: 1;
+  transform: translateY(0);
 }
 
-/* Responsividade Mobile */
+/* Responsividade */
+@media (max-width: 1400px) {
+    /* Se a tela for menor que o novo tamanho máximo, o título diminui um pouco */
+    .skill-tree-title { font-size: 2.5rem; }
+}
 @media (max-width: 768px) {
-  .skill-tree-title { font-size: 2rem; }
-  .skill-badge-wrapper { width: 12%; } /* Ícones um pouco maiores no celular */
+  .skill-tree-title { font-size: 2rem; margin-bottom: 30px; }
+  .skill-badge-wrapper { width: 13%; } /* Badges maiores no celular */
 }

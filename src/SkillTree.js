@@ -26,11 +26,14 @@ const skills = [
 const SkillTree = () => {
   return (
     <div className="skill-tree-container">
-      <h2 className="skill-tree-title">Skill Tree</h2>
+      {/* TÍTULO NOVO: "Habilidades" branco, "técnicas" roxo */}
+      <h2 className="skill-tree-title">
+        Habilidades <span className="highlight">técnicas</span>
+      </h2>
       
       <div 
         className="tree-board" 
-        style={{ backgroundImage: "url('/images/treebackground2.jpg')" }}
+        style={{ backgroundImage: "url('/images/treebackground.jpg')" }}
       >
         {skills.map((skill) => (
           <div 
@@ -39,12 +42,7 @@ const SkillTree = () => {
             style={{ left: skill.left, top: skill.top }}
           >
             <div className="skill-badge-inner">
-              {/* Se for o Avatar, usamos borda redonda, se for badge, normal */}
-              <img 
-                src={skill.src} 
-                alt={skill.name} 
-                style={skill.id === 'avatar' ? { borderRadius: '50%', border: '2px solid #a855f7' } : {}}
-              />
+              <img src={skill.src} alt={skill.name} />
             </div>
             <div className="skill-tooltip">{skill.name}</div>
           </div>
