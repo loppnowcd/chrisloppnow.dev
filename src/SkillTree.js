@@ -1,11 +1,11 @@
 import React from 'react';
 import './SkillTree.css';
 
-// Componente da Badge
+// Componente da Badge (Sem alterações)
 const SkillNode = ({ name, imageSrc, style }) => (
   <div className="skill-node" style={style}>
     <div className="badge-wrapper">
-      {/* ATENÇÃO: Usando .png para a transparência funcionar */}
+      {/* Usando .png para transparência */}
       <img src={imageSrc} alt={name} />
     </div>
     <div className="skill-name">{name}</div>
@@ -18,95 +18,80 @@ const SkillTree = () => {
       <h2 className="rpg-title">Skill Tree</h2>
 
       <div className="tree-wrapper">
-        {/* CAMADA DE CONEXÕES (SVG) - O "Esqueleto" da Árvore */}
-        <svg className="connections-svg" width="100%" height="100%" viewBox="0 0 600 400" preserveAspectRatio="none">
+        {/* --- CAMADA DE CONEXÕES (SVG) --- 
+            Desenhando as linhas com base no novo layout.
+            Usei cores para diferenciar os caminhos.
+        */}
+        <svg className="connections-svg" width="100%" height="100%" viewBox="0 0 700 500" preserveAspectRatio="none">
           
-          {/* RAMIFICAÇÃO PRINCIPAL (Git -> JS) */}
-          <path d="M50 200 L150 200" className="connection-line main-branch" />
+          {/* CAMINHO DA BASE (Front-end Inicial) - AZUL */}
+          {/* HTML -> Git */}
+          <path d="M50 50 L 150 150" className="connection-line front-branch" />
+          {/* CSS -> Git */}
+          <path d="M150 50 L 150 150" className="connection-line front-branch" />
+          {/* JS -> Git */}
+          <path d="M250 50 L 150 150" className="connection-line front-branch" />
 
-          {/* A GRANDE RAMIFICAÇÃO DO JS (Centro) */}
-          {/* Para cima (Front-end) */}
-          <path d="M150 200 Q 200 100, 250 100" className="connection-line front-branch" />
-          {/* Para o meio (Core) */}
-          <path d="M150 200 L 250 200" className="connection-line core-branch" />
-          {/* Para baixo (Back-end) */}
-          <path d="M150 200 Q 200 300, 250 300" className="connection-line back-branch" />
+          {/* CAMINHO DO BACK-END (A espinha dorsal) - ROXO */}
+          {/* Git -> SQL */}
+          <path d="M150 150 L 250 150" className="connection-line back-branch" />
+          {/* SQL -> C# */}
+          <path d="M250 150 L 250 250" className="connection-line back-branch" />
+          {/* C# -> .NET */}
+          <path d="M250 250 L 350 250" className="connection-line back-branch" />
 
-          {/* SUB-RAMIFICAÇÕES */}
-          {/* Front-end: HTML/CSS -> React */}
-          <path d="M250 100 L 350 100" className="connection-line front-branch" />
-          <path d="M350 100 L 450 100" className="connection-line front-branch" />
+          {/* CAMINHO DA INFRA/MODERNO - LARANJA/CINZA */}
+          {/* .NET -> Docker */}
+          <path d="M350 250 L 450 250" className="connection-line core-branch" />
+          {/* Docker -> React */}
+          <path d="M450 250 L 450 350" className="connection-line core-branch" />
+          
+          {/* RAMIFICAÇÕES FINAIS */}
+          {/* React -> TypeScript (Volta pro Azul/Front) */}
+          <path d="M450 350 L 550 350" className="connection-line front-branch" />
+          {/* React -> Azure (Infra) */}
+          <path d="M450 350 L 450 450" className="connection-line core-branch" />
+          {/* Azure -> n8n (Automação) */}
+          <path d="M450 450 L 550 450" className="connection-line core-branch" />
 
-          {/* Core: TS -> n8n -> Docker */}
-          <path d="M250 200 L 350 200" className="connection-line core-branch" />
-          <path d="M350 200 L 450 200" className="connection-line core-branch" />
-
-          {/* Back-end: SQL -> C# -> .NET -> Azure */}
-          <path d="M250 300 L 350 300" className="connection-line back-branch" />
-          <path d="M350 300 L 450 300" className="connection-line back-branch" />
-          <path d="M450 300 L 550 300" className="connection-line back-branch" />
-
-          {/* CONEXÕES CRUZADAS (Opcional, para mais complexidade) */}
-          <path d="M350 100 L 350 200" className="connection-line cross-branch" style={{opacity: 0.5}} />
-          <path d="M350 300 L 350 200" className="connection-line cross-branch" style={{opacity: 0.5}} />
         </svg>
 
-        {/* O GRID DE POSICIONAMENTO */}
+        {/* --- O GRID DE POSICIONAMENTO --- 
+            Mapeando cada badge para sua posição no desenho.
+        */}
         <div className="nodes-grid" style={{ 
             display: 'grid', 
-            // Grid mais fino para posicionamento preciso
-            gridTemplateColumns: 'repeat(6, 1fr)', 
+            // Grid de 7x5 para caber o layout novo
+            gridTemplateColumns: 'repeat(7, 1fr)', 
             gridTemplateRows: 'repeat(5, 1fr)', 
             width: '100%', 
             maxWidth: '1000px',
-            height: '500px' 
+            height: '500px',
+            // Pequeno ajuste para alinhar os nós com as pontas das linhas SVG
+            padding: '20px 0'
           }}>
           
-          {/* NÓ INICIAL: Git */}
-          <div style={{ gridColumn: 1, gridRow: 3 }}>
-             <SkillNode name="Git" imageSrc="/badges/badgegit.png" />
-          </div>
+          {/* LINHA 1: A Base */}
+          <div style={{ gridColumn: 1, gridRow: 1 }}> <SkillNode name="HTML5" imageSrc="/images/badges/badgehtml.png" /> </div>
+          <div style={{ gridColumn: 2, gridRow: 1 }}> <SkillNode name="CSS3" imageSrc="/images/badges/badgecss.png" /> </div>
+          <div style={{ gridColumn: 3, gridRow: 1 }}> <SkillNode name="JavaScript" imageSrc="/images/badges/badgejavascript.png" /> </div>
 
-          {/* NÓ CENTRAL: JavaScript */}
-          <div style={{ gridColumn: 2, gridRow: 3 }}>
-            <SkillNode name="JavaScript" imageSrc="/badges/badgejavascript.png" />
-          </div>
+          {/* LINHA 2: O Centro */}
+          <div style={{ gridColumn: 2, gridRow: 2 }}> <SkillNode name="Git" imageSrc="/images/badges/badgegit.png" /> </div>
+          <div style={{ gridColumn: 3, gridRow: 2 }}> <SkillNode name="SQL" imageSrc="/images/badges/badgesql.png" /> </div>
 
-          {/* --- RAMO SUPERIOR (Front-end) --- */}
-          <div style={{ gridColumn: 3, gridRow: 1 }}>
-            <SkillNode name="HTML5" imageSrc="/badges/badgehtml.png" />
-          </div>
-          <div style={{ gridColumn: 3, gridRow: 2 }}>
-            <SkillNode name="CSS3" imageSrc="/badges/badgecss.png" />
-          </div>
-          <div style={{ gridColumn: 4, gridRow: 1, gridRowSpan: 2, alignSelf: 'center' }}>
-            <SkillNode name="React" imageSrc="/badges/badgereact.png" />
-          </div>
+          {/* LINHA 3: Back-end & Infra */}
+          <div style={{ gridColumn: 3, gridRow: 3 }}> <SkillNode name="C#" imageSrc="/images/badges/badgecsharp.png" /> </div>
+          <div style={{ gridColumn: 4, gridRow: 3 }}> <SkillNode name=".NET" imageSrc="/images/badges/badgedotnet.png" /> </div>
+          <div style={{ gridColumn: 5, gridRow: 3 }}> <SkillNode name="Docker" imageSrc="/images/badges/badgedocker.png" /> </div>
 
-          {/* --- RAMO DO MEIO (Core/Ferramentas) --- */}
-          <div style={{ gridColumn: 3, gridRow: 3 }}>
-            <SkillNode name="TypeScript" imageSrc="/badges/badgetypescript.png" />
-          </div>
-          <div style={{ gridColumn: 4, gridRow: 3 }}>
-            <SkillNode name="n8n" imageSrc="/badges/badgen8n.png" />
-          </div>
-          <div style={{ gridColumn: 5, gridRow: 3 }}>
-            <SkillNode name="Docker" imageSrc="/badges/badgedocker.png" />
-          </div>
+          {/* LINHA 4: Front-end Moderno */}
+          <div style={{ gridColumn: 5, gridRow: 4 }}> <SkillNode name="React" imageSrc="/images/badges/badgereact.png" /> </div>
+          <div style={{ gridColumn: 6, gridRow: 4 }}> <SkillNode name="TypeScript" imageSrc="/images/badges/badgetypescript.png" /> </div>
 
-          {/* --- RAMO INFERIOR (Back-end) --- */}
-          <div style={{ gridColumn: 3, gridRow: 4 }}>
-            <SkillNode name="SQL" imageSrc="/badges/badgesql.png" />
-          </div>
-          <div style={{ gridColumn: 4, gridRow: 4 }}>
-            <SkillNode name="C#" imageSrc="/badges/badgecsharp.png" />
-          </div>
-          <div style={{ gridColumn: 5, gridRow: 4 }}>
-            <SkillNode name=".NET" imageSrc="/badges/badgedotnet.png" />
-          </div>
-          <div style={{ gridColumn: 6, gridRow: 4 }}>
-            <SkillNode name="Azure" imageSrc="/badges/badgeazure.png" />
-          </div>
+          {/* LINHA 5: Cloud & Automação */}
+          <div style={{ gridColumn: 5, gridRow: 5 }}> <SkillNode name="Azure" imageSrc="/images/badges/badgeazure.png" /> </div>
+          <div style={{ gridColumn: 6, gridRow: 5 }}> <SkillNode name="n8n" imageSrc="/images/badges/badgen8n.png" /> </div>
 
         </div>
       </div>

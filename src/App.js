@@ -109,4 +109,16 @@ function App() {
   );
 }
 
+function App() {
+  return (
+    // CONTAINER PRINCIPAL
+    // Removi 'scroll-smooth' para deixar a transição mais direta.
+    <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory">
+      
+      {/* ... resto do seu código ... */}
+
+    </div>
+  );
+}
+
 export default App;
