@@ -6,19 +6,15 @@ import ReactFlow, {
 import 'reactflow/dist/style.css'; 
 import './SkillTree.css';
 
-// --- NÓ CUSTOMIZADO (A Badge) ---
 const BadgeNode = ({ data }) => {
   return (
     <div className="skill-node-custom">
+      {/* Handles em todas as direções para conexões flexíveis */}
       <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
-      <Handle type="target" position={Position.Left} style={{ opacity: 0 }} />
-      
       <div className="badge-wrapper">
         <img src={data.imageSrc} alt={data.label} />
       </div>
       <div className="skill-name">{data.label}</div>
-
-      <Handle type="source" position={Position.Right} style={{ opacity: 0 }} />
       <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
     </div>
   );
@@ -27,58 +23,66 @@ const BadgeNode = ({ data }) => {
 const SkillTree = () => {
   const nodeTypes = useMemo(() => ({ badge: BadgeNode }), []);
 
-  // --- DEFINIÇÃO DOS NÓS ---
+  // --- LAYOUT SIMÉTRICO E PROFISSIONAL ---
+  // Vamos usar um eixo central (X = 400)
   const nodes = [
-    // LINHA 1 (Topo)
-    { id: 'html', type: 'badge', position: { x: 0, y: 0 }, data: { label: 'HTML5', imageSrc: '/images/badges/badgehtml.png' } },
-    { id: 'css', type: 'badge', position: { x: 150, y: 0 }, data: { label: 'CSS3', imageSrc: '/images/badges/badgecss.png' } },
-    { id: 'js', type: 'badge', position: { x: 300, y: 0 }, data: { label: 'JavaScript', imageSrc: '/images/badges/badgejavascript.png' } },
+    // NÍVEL 1: A Fundação (Centralizados no topo)
+    { id: 'html', type: 'badge', position: { x: 250, y: 0 }, data: { label: 'HTML5', imageSrc: '/images/badges/badgehtml.png' } },
+    { id: 'css', type: 'badge', position: { x: 400, y: 0 }, data: { label: 'CSS3', imageSrc: '/images/badges/badgecss.png' } },
+    { id: 'js', type: 'badge', position: { x: 550, y: 0 }, data: { label: 'JavaScript', imageSrc: '/images/badges/badgejavascript.png' } },
     
-    // LINHA 2
-    { id: 'git', type: 'badge', position: { x: 150, y: 150 }, data: { label: 'Git', imageSrc: '/images/badges/badgegit.png' } },
-    { id: 'sql', type: 'badge', position: { x: 350, y: 150 }, data: { label: 'SQL', imageSrc: '/images/badges/badgesql.png' } },
+    // NÍVEL 2: O Controle (O Funil)
+    { id: 'git', type: 'badge', position: { x: 400, y: 150 }, data: { label: 'Git', imageSrc: '/images/badges/badgegit.png' } },
     
-    // LINHA 3
-    { id: 'csharp', type: 'badge', position: { x: 350, y: 300 }, data: { label: 'C#', imageSrc: '/images/badges/badgecsharp.png' } },
-    
-    // LINHA 4
-    { id: 'dotnet', type: 'badge', position: { x: 500, y: 300 }, data: { label: '.NET', imageSrc: '/images/badges/badgedotnet.png' } },
-    { id: 'docker', type: 'badge', position: { x: 700, y: 300 }, data: { label: 'Docker', imageSrc: '/images/badges/badgedocker.png' } },
-    
-    // LINHA 5
-    { id: 'react', type: 'badge', position: { x: 700, y: 450 }, data: { label: 'React', imageSrc: '/images/badges/badgereact.png' } },
-    { id: 'ts', type: 'badge', position: { x: 900, y: 450 }, data: { label: 'TypeScript', imageSrc: '/images/badges/badgetypescript.png' } },
+    // NÍVEL 3: A Bifurcação (Back-end ESQ | Front/Modern DIR)
+    { id: 'sql', type: 'badge', position: { x: 250, y: 280 }, data: { label: 'SQL', imageSrc: '/images/badges/badgesql.png' } },
+    { id: 'react', type: 'badge', position: { x: 550, y: 280 }, data: { label: 'React', imageSrc: '/images/badges/badgereact.png' } },
 
-    // LINHA 6
-    { id: 'azure', type: 'badge', position: { x: 700, y: 600 }, data: { label: 'Azure', imageSrc: '/images/badges/badgeazure.png' } },
-    { id: 'n8n', type: 'badge', position: { x: 900, y: 600 }, data: { label: 'n8n', imageSrc: '/images/badges/badgen8n.png' } },
+    // NÍVEL 4: Aprofundamento
+    { id: 'csharp', type: 'badge', position: { x: 250, y: 410 }, data: { label: 'C#', imageSrc: '/images/badges/badgecsharp.png' } },
+    { id: 'ts', type: 'badge', position: { x: 550, y: 410 }, data: { label: 'TypeScript', imageSrc: '/images/badges/badgetypescript.png' } },
+
+    // NÍVEL 5: Frameworks & Infra
+    { id: 'dotnet', type: 'badge', position: { x: 250, y: 540 }, data: { label: '.NET', imageSrc: '/images/badges/badgedotnet.png' } },
+    { id: 'docker', type: 'badge', position: { x: 550, y: 540 }, data: { label: 'Docker', imageSrc: '/images/badges/badgedocker.png' } },
+
+    // NÍVEL 6: Convergência Final (Cloud & Automação)
+    { id: 'azure', type: 'badge', position: { x: 400, y: 680 }, data: { label: 'Azure', imageSrc: '/images/badges/badgeazure.png' } },
+    { id: 'n8n', type: 'badge', position: { x: 400, y: 810 }, data: { label: 'n8n', imageSrc: '/images/badges/badgen8n.png' } },
   ];
 
-  // --- CONEXÕES ---
+  // --- CONEXÕES SUAVES (BEZIER) ---
+  // type: 'default' cria curvas Bézier naturais e elegantes.
   const edges = [
-    // Caminho Azul (Front)
-    { id: 'e-html-git', source: 'html', target: 'git', type: 'smoothstep', className: 'edge-fluid-blue' },
-    { id: 'e-css-git', source: 'css', target: 'git', type: 'smoothstep', className: 'edge-fluid-blue' },
-    { id: 'e-js-git', source: 'js', target: 'git', type: 'smoothstep', className: 'edge-fluid-blue' },
+    // Fundação -> Git
+    { id: 'e-html-git', source: 'html', target: 'git', type: 'default', className: 'edge-elegant' },
+    { id: 'e-css-git', source: 'css', target: 'git', type: 'default', className: 'edge-elegant' },
+    { id: 'e-js-git', source: 'js', target: 'git', type: 'default', className: 'edge-elegant' },
 
-    // Caminho Roxo (Back)
-    { id: 'e-git-sql', source: 'git', target: 'sql', type: 'smoothstep', className: 'edge-fluid-purple' },
-    { id: 'e-sql-csharp', source: 'sql', target: 'csharp', type: 'smoothstep', className: 'edge-fluid-purple' },
-    { id: 'e-csharp-dotnet', source: 'csharp', target: 'dotnet', type: 'smoothstep', className: 'edge-fluid-purple' },
+    // Git distribui
+    { id: 'e-git-sql', source: 'git', target: 'sql', type: 'default', className: 'edge-elegant' },
+    { id: 'e-git-react', source: 'git', target: 'react', type: 'default', className: 'edge-elegant' },
 
-    // Caminho Laranja/Misto (Infra)
-    { id: 'e-dotnet-docker', source: 'dotnet', target: 'docker', type: 'smoothstep', className: 'edge-fluid-orange' },
-    { id: 'e-docker-react', source: 'docker', target: 'react', type: 'smoothstep', className: 'edge-fluid-orange' },
+    // Coluna da Esquerda (Back)
+    { id: 'e-sql-csharp', source: 'sql', target: 'csharp', type: 'default', className: 'edge-elegant' },
+    { id: 'e-csharp-dotnet', source: 'csharp', target: 'dotnet', type: 'default', className: 'edge-elegant' },
 
-    // Finais
-    { id: 'e-react-ts', source: 'react', target: 'ts', type: 'smoothstep', className: 'edge-fluid-blue' },
-    { id: 'e-react-azure', source: 'react', target: 'azure', type: 'smoothstep', className: 'edge-fluid-orange' },
-    { id: 'e-azure-n8n', source: 'azure', target: 'n8n', type: 'smoothstep', className: 'edge-fluid-orange' },
+    // Coluna da Direita (Front/Modern)
+    { id: 'e-react-ts', source: 'react', target: 'ts', type: 'default', className: 'edge-elegant' },
+    { id: 'e-ts-docker', source: 'ts', target: 'docker', type: 'default', className: 'edge-elegant' },
+
+    // Convergência para Azure
+    { id: 'e-dotnet-azure', source: 'dotnet', target: 'azure', type: 'default', className: 'edge-elegant' },
+    { id: 'e-docker-azure', source: 'docker', target: 'azure', type: 'default', className: 'edge-elegant' },
+
+    // Final
+    { id: 'e-azure-n8n', source: 'azure', target: 'n8n', type: 'default', className: 'edge-elegant' },
   ];
 
   return (
     <div className="rpg-container-flow">
-      <h2 className="text-4xl font-bold mb-8 text-center uppercase tracking-widest bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent filter drop-shadow-lg">
+      {/* TÍTULO COM ESPAÇAMENTO CORRETO */}
+      <h2 className="skill-tree-title">
         Skill Tree
       </h2>
       
@@ -89,18 +93,15 @@ const SkillTree = () => {
           nodeTypes={nodeTypes}
           fitView
           attributionPosition="bottom-right"
-          
-          // --- CONFIGURAÇÕES CRÍTICAS PARA O SCROLL ---
           nodesDraggable={false}
           nodesConnectable={false}
           elementsSelectable={false}
-          zoomOnScroll={false}      // Não dar zoom com a roda
-          panOnScroll={false}       // Não arrastar com a roda
-          zoomOnDoubleClick={false} // Não dar zoom com clique duplo
-          preventScrolling={false}  // O MAIS IMPORTANTE: Permite que a página role!
-          panOnDrag={false}         // Desativa o "agarrar" a tela
+          zoomOnScroll={false}
+          panOnScroll={false}
+          zoomOnDoubleClick={false}
+          preventScrolling={false}
+          panOnDrag={false}
         >
-          {/* Removi o <Background /> aqui */}
         </ReactFlow>
       </div>
     </div>
