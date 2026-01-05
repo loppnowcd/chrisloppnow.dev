@@ -26,14 +26,14 @@ const skills = [
 const SkillTree = () => {
   return (
     <div className="skill-tree-container">
-      {/* TÍTULO NOVO: "Habilidades" branco, "técnicas" roxo */}
+      {/* Título unificado com a mesma classe do Hero */}
       <h2 className="skill-tree-title">
-        Habilidades <span className="highlight">técnicas</span>
+        Habilidades Técnicas
       </h2>
       
       <div 
         className="tree-board" 
-        style={{ backgroundImage: "url('/images/treebackground.jpg')" }}
+        style={{ backgroundImage: "url('/images/treebackground2.jpg')" }}
       >
         {skills.map((skill) => (
           <div 

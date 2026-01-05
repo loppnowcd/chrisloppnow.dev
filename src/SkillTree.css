@@ -2,52 +2,65 @@
 
 .skill-tree-container {
   width: 100%;
-  height: 100%;
+  height: 100%; /* Ocupa a tela toda (h-screen do pai) */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 20px; /* Um pouco mais de respiro em cima e embaixo */
+  
+  /* ALINHAMENTO VERTICAL */
+  /* 'center' agrupa tudo no meio. Com o 'gap' abaixo, criamos o respiro. */
+  justify-content: center; 
+  
+  /* Isso empurra o título pra cima e a árvore pra baixo, criando o espaço ideal */
+  gap: 6vh; 
+  
+  padding: 20px;
   pointer-events: auto;
 }
 
-/* --- NOVO ESTILO DO TÍTULO (Igual à Div 1) --- */
+/* --- ESTILO "HERO" (Igual ao App.js) --- */
 .skill-tree-title {
-  font-size: 3rem; /* Tamanho grande e impactante */
-  font-weight: 800;  /* Negrito forte */
-  color: #ffffff;    /* Cor base branca */
+  /* Tamanho: Um pouco menor que o 5xl/7xl (que seria ~4.5rem), mas ainda grande */
+  font-size: 3.5rem; 
+  font-weight: 700; /* font-bold */
   text-align: center;
-  margin-bottom: 50px; /* Mais espaço entre o título e a árvore */
-  text-transform: none; /* Remove o uppercase forçado */
-  letter-spacing: 0.05em;
-  font-family: inherit; /* Usa a mesma fonte do resto do site */
+  
+  /* A MÁGICA DO GRADIENTE (Tailwind Translation) */
+  /* from-purple-400 (#c084fc) via-purple-500 (#a855f7) to-pink-500 (#ec4899) */
+  background: linear-gradient(to right, #c084fc, #a855f7, #ec4899);
+  
+  /* Corta o fundo no formato do texto */
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* Deixa o texto transparente para o fundo aparecer */
+  color: transparent; 
+  -webkit-text-fill-color: transparent;
+
+  /* Removemos margens manuais pois o container usa 'gap' agora */
+  margin: 0;
+  
+  /* Garante a fonte do sistema */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* A palavra "técnicas" em destaque (Roxo/Rosa da Div 1) */
-.skill-tree-title .highlight {
-  color: #a855f7; /* Um roxo vibrante (ajuste se não for a cor exata) */
-}
+/* --- O RESTO CONTINUA IGUAL --- */
 
-/* --- O TABULEIRO (AUMENTO DE TAMANHO) --- */
 .tree-board {
   width: 100%;
-  /* AQUI ESTÁ O AUMENTO! De 1100px para 1350px (~20%) */
-  max-width: 1350px;
+  max-width: 1350px; /* Tamanho aumentado (+20%) */
   aspect-ratio: 16 / 9;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
-  /* Uma transição suave caso a tela mude de tamanho */
   transition: max-width 0.3s ease;
 }
 
-/* --- AS BADGES (Crescem junto com o tabuleiro) --- */
 .skill-badge-wrapper {
   position: absolute;
-  /* O tamanho delas é % do tabuleiro, então crescem automaticamente */
-  width: 8.8%; 
+  width: 8.8%;
   aspect-ratio: 1 / 1;
   transform: translate(-50%, -50%);
   cursor: pointer;
@@ -57,12 +70,12 @@
   justify-content: center;
 }
 
-/* Resto dos estilos (hover, tooltip) permanecem iguais... */
 .skill-badge-inner {
   width: 100%;
   height: 100%;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .skill-badge-inner img {
   width: 100%;
   height: 100%;
@@ -70,13 +83,17 @@
   filter: grayscale(40%) brightness(0.7) contrast(1.2);
   transition: all 0.3s ease;
 }
+
+/* HOVER EFFECT */
 .skill-badge-wrapper:hover .skill-badge-inner {
   transform: scale(1.35);
   z-index: 20;
 }
+
 .skill-badge-wrapper:hover img {
   filter: grayscale(0%) brightness(1.1) contrast(1) drop-shadow(0 0 15px rgba(192, 132, 252, 0.9)) drop-shadow(0 0 30px rgba(236, 72, 153, 0.7));
 }
+
 .skill-tooltip {
   position: absolute;
   bottom: -35px;
@@ -94,17 +111,18 @@
   transition: opacity 0.3s, transform 0.3s;
   transform: translateY(10px);
 }
+
 .skill-badge-wrapper:hover .skill-tooltip {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Responsividade */
 @media (max-width: 1400px) {
-    /* Se a tela for menor que o novo tamanho máximo, o título diminui um pouco */
     .skill-tree-title { font-size: 2.5rem; }
 }
+
 @media (max-width: 768px) {
-  .skill-tree-title { font-size: 2rem; margin-bottom: 30px; }
-  .skill-badge-wrapper { width: 13%; } /* Badges maiores no celular */
+  .skill-tree-title { font-size: 2rem; }
+  .skill-badge-wrapper { width: 13%; }
+  .skill-tree-container { gap: 4vh; } /* Menos espaço no celular */
 }
