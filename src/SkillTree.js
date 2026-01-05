@@ -5,11 +5,7 @@ import './SkillTree.css';
 // o 'left' e 'top' visualmente e depois copie os números para cá.
 
 const skills = [
-  // --- O AVATAR / LOGO (Slot 1 ou Central?) ---
-  // Se o slot extra for no começo, use este. Se for no fim, mova para o final.
-  { id: 'avatar', name: 'Chris', src: '/images/image1end.jpeg', left: '5%', top: '50%' }, 
 
-  // --- HABILIDADES TÉCNICAS ---
   { id: 'html', name: 'HTML5', src: '/images/badges/badgehtml.png', left: '12%', top: '50%' },
   { id: 'css', name: 'CSS3', src: '/images/badges/badgecss.png', left: '19%', top: '50%' },
   { id: 'js', name: 'JavaScript', src: '/images/badges/badgejavascript.png', left: '26%', top: '30%' },
@@ -34,7 +30,7 @@ const SkillTree = () => {
       
       <div 
         className="tree-board" 
-        style={{ backgroundImage: "url('/images/treebackground.jpg')" }}
+        style={{ backgroundImage: "url('/images/treebackground2.jpg')" }}
       >
         {skills.map((skill) => (
           <div 
