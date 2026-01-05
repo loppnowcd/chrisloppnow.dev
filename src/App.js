@@ -4,8 +4,9 @@ import SkillTree from './SkillTree';
 
 function App() {
   return (
-    // CONTAINER PRINCIPAL COM SCROLL SNAP
-    <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    // CONTAINER PRINCIPAL
+    // Removi 'scroll-smooth' para o efeito de pulo mais rápido e direto entre as seções
+    <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory">
       
       {/* SEÇÃO 1: HERO (1º lugar) */}
       <section className="h-screen w-full snap-start flex items-center justify-center px-4 relative">
@@ -48,13 +49,12 @@ function App() {
         </div>
       </section>
 
-      {/* SEÇÃO 2: SKILL TREE (Agora em 2º lugar) */}
-      {/* MUDANÇA AQUI: bg-gray-900 virou bg-black */}
+      {/* SEÇÃO 2: SKILL TREE (2º lugar) */}
       <section className="h-screen w-full snap-start bg-black flex items-center justify-center overflow-hidden">
         <SkillTree />
       </section>
 
-      {/* SEÇÃO 3: PROJETOS (Agora em 3º lugar) */}
+      {/* SEÇÃO 3: PROJETOS (3º lugar) */}
       <section className="h-screen w-full snap-start flex flex-col justify-center px-4 bg-black">
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-4xl font-bold mb-12 text-center text-purple-400">Projetos</h2>
@@ -104,18 +104,6 @@ function App() {
           </div>
         </div>
       </section>
-
-    </div>
-  );
-}
-
-function App() {
-  return (
-    // CONTAINER PRINCIPAL
-    // Removi 'scroll-smooth' para deixar a transição mais direta.
-    <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory">
-      
-      {/* ... resto do seu código ... */}
 
     </div>
   );
