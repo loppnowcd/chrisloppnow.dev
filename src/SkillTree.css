@@ -95,7 +95,7 @@
 
 /* Quando existe skill ativa, apagar o resto */
 .skill-badge-wrapper.inactive {
-  opacity: 0.25;
+  opacity: 0.45;
   transition: opacity 0.2s ease;
 }
 
