@@ -69,7 +69,7 @@ function App() {
 
       {/* SEÇÃO 2: SKILL TREE */}
       <section className="h-screen w-full snap-start bg-black flex items-center justify-center overflow-hidden">
-        <SkillTree />
+        <SkillTree onSelectSkill={setSelectedSkill} />
       </section>
 
       {/* SEÇÃO 3: PROJETOS */}
