@@ -76,7 +76,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: grayscale(15%) brightness(0.9) contrast(1.2);
+  filter: none;
   transition: all 0.3s ease;
 }
 
@@ -94,9 +94,8 @@
 }
 
 /* Quando existe skill ativa, apagar o resto */
-.skill-badge-wrapper.inactive {
-  opacity: 0.45;
-  transition: opacity 0.2s ease;
+.skill-badge-wrapper.inactive img {
+  filter: grayscale(50%) brightness(0.75) contrast(1);
 }
 
 /* Skill ativa permanece destacada */
