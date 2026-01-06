@@ -2,7 +2,7 @@
 
 export const skills = [
   {
-    id: "javascript",
+    id: "js",
     name: "JavaScript",
     level: "Intermediário",
     levelScore: 3,

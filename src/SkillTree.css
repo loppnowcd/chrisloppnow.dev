@@ -79,11 +79,6 @@
   transition: all 0.3s ease;
 }
 
-/* HOVER EFFECT */
-.skill-badge-wrapper:hover .skill-badge-inner {
-  transform: scale(1);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-}
 
 .skill-badge-wrapper {
   cursor: pointer;
