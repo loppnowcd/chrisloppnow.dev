@@ -40,10 +40,13 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
           return (
             <div
               key={skill.id}
-              className="skill-badge-wrapper"
+              className={`skill-badge-wrapper ${
+              activeSkill?.id === skill.id ? 'active' : 'inactive'
+              }`}
               style={{ left: pos.left, top: pos.top }}
               onClick={() => onSelectSkill(skill)}
-            >
+              >
+
               <div className="skill-badge-inner">
                 <img src={skill.badge} alt={skill.name} />
               </div>
