@@ -32,7 +32,7 @@ export const skills = [
     evidence: [
       "Landing page pessoal"
     ],
-    badge: "/images/badges/html.png"
+    badge: "/images/badges/badgehtml.png"
   },
 
   {
