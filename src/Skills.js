@@ -16,7 +16,7 @@ export const skills = [
       "Landing page pessoal",
       "Projetos públicos (em breve)"
     ],
-    badge: "/badges/javascript.png"
+    badge: "/images/badges/badgejavascript.png"
   },
 
   {
@@ -32,7 +32,7 @@ export const skills = [
     evidence: [
       "Landing page pessoal"
     ],
-    badge: "/badges/html.png"
+    badge: "/images/badges/html.png"
   },
 
   {
@@ -48,6 +48,6 @@ export const skills = [
     evidence: [
       "Landing page pessoal"
     ],
-    badge: "/badges/css.png"
+    badge: "/images/badges/badgecss.png"
   }
 ];
