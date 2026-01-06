@@ -23,17 +23,14 @@ const skillPositions = [
   { id: 'n8n', left: '90.5%', top: '49.5%' },
 ];
 
-const SkillTree = ({ onSelectSkill }) => {
+const SkillTree = ({ onSelectSkill, activeSkill }) => {
   return (
-    <div className="skill-tree-container">
+    <div className={`skill-tree-container ${activeSkill ? 'dimmed' : ''}`}>
       <h2 className="skill-tree-title">
         Habilidades Técnicas
       </h2>
 
-      <div
-        className="tree-board"
-        style={{ backgroundImage: "url('/images/treebackground2.jpg')" }}
-      >
+      <div className="tree-board">
         {skillPositions.map((pos) => {
           const skill = skillData.find(s => s.id === pos.id);
 
