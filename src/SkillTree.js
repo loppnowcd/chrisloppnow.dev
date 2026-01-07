@@ -29,19 +29,18 @@ const skillPositions = [
 const connections = [
   { from: 'html', to: 'git', curve: 6 },
   { from: 'git', to: 'css', curve: 8 },
-  { from: 'git', to: 'js', curve: 8 },
-  { from: 'git', to: 'sql', curve: 10 },
+  { from: 'git', to: 'js', curve: -8 },
+  { from: 'git', to: 'sql', curve: 6 },
 
   { from: 'sql', to: 'csharp', curve: 6 },
-  { from: 'csharp', to: 'dotnet', curve: 8 },
   { from: 'csharp', to: 'react', curve: 10 },
-  { from: 'csharp', to: 'docker', curve: 10 },
+  { from: 'csharp', to: 'dotnet', curve: -8 },
+  { from: 'csharp', to: 'docker', curve: -10 },
 
   { from: 'dotnet', to: 'azure', curve: 6 },
   { from: 'react', to: 'ts', curve: 6 },
   { from: 'ts', to: 'n8n', curve: 6 },
 ];
-
 
 /* "50%" -> 50 */
 const percent = (value) => parseFloat(value);
@@ -60,56 +59,64 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
           className="skill-tree-lines"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
-          width="100%"
-          height="100%"
           style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
+            inset: 0,
             zIndex: 1,
             pointerEvents: 'none'
           }}
         >
           <defs>
-            <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.25" />
-              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.25" />
+
+            {/* GRADIENTE CORRIGIDO */}
+            <linearGradient
+              id="skillGradient"
+              gradientUnits="userSpaceOnUse"
+              x1="0"
+              y1="0"
+              x2="100"
+              y2="0"
+            >
+              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.2" />
             </linearGradient>
 
+            {/* GLOW SUAVE */}
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feGaussianBlur stdDeviation="2" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+
           </defs>
 
           {connections.map(({ from, to, curve }, index) => {
-  const start = skillPositions.find(s => s.id === from);
-  const end = skillPositions.find(s => s.id === to);
-  if (!start || !end) return null;
+            const start = skillPositions.find(s => s.id === from);
+            const end = skillPositions.find(s => s.id === to);
+            if (!start || !end) return null;
 
-  return (
-    <path
-      key={index}
-      d={`
-        M ${percent(start.left)} ${percent(start.top)}
-        C
-        ${percent(start.left) + curve} ${percent(start.top)},
-        ${percent(end.left) - curve} ${percent(end.top)},
-        ${percent(end.left)} ${percent(end.top)}
-      `}
-      fill="none"
-      stroke="url(#skillGradient)"
-      strokeWidth="0.6"
-      opacity="0.45"
-      filter="url(#glow)"
-    />
-  );
-})}
-
+            return (
+              <path
+                key={index}
+                d={`
+                  M ${percent(start.left)} ${percent(start.top)}
+                  C
+                  ${percent(start.left) + curve} ${percent(start.top)},
+                  ${percent(end.left) - curve} ${percent(end.top)},
+                  ${percent(end.left)} ${percent(end.top)}
+                `}
+                fill="none"
+                stroke="url(#skillGradient)"
+                strokeWidth="0.7"
+                opacity="0.45"
+                filter="url(#glow)"
+                className="skill-connection"
+              />
+            );
+          })}
         </svg>
 
         {/* ===== BADGES ===== */}
