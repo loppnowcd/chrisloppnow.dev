@@ -93,20 +93,20 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
             return (
               <path
-                key={index}
-                d={`
-                  M ${percent(start.left)}% ${percent(start.top)}%
-                  C
-                  ${percent(start.left) + 6}% ${percent(start.top)}%,
-                  ${percent(end.left) - 6}% ${percent(end.top)}%,
-                  ${percent(end.left)}% ${percent(end.top)}%
-                `}
-                fill="none"
-                stroke="url(#skillGradient)"
-                strokeWidth="1.2"
-                opacity="0.4"
-                filter="url(#glow)"
-              />
+  key={index}
+  d={`
+    M ${percent(start.left)} ${percent(start.top)}
+    C
+    ${percent(start.left) + 6} ${percent(start.top)},
+    ${percent(end.left) - 6} ${percent(end.top)},
+    ${percent(end.left)} ${percent(end.top)}
+  `}
+  fill="none"
+  stroke="url(#skillGradient)"
+  strokeWidth="0.6"
+  opacity="0.45"
+  filter="url(#glow)"
+/>
             );
           })}
         </svg>
