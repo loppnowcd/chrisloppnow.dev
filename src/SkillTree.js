@@ -7,20 +7,20 @@ import { skills as skillData } from './Skills';
 
 const skillPositions = [
   { id: 'html', left: '9.3%', top: '50%' },
-  { id: 'css', left: '36%', top: '29%' },
-  { id: 'js', left: '36%', top: '71%' },
-  { id: 'git', left: '22.9%', top: '50%' },
+  { id: 'css', left: '31.3%', top: '27%' },
+  { id: 'js', left: '31.3%', top: '74%' },
+  { id: 'git', left: '19.9%', top: '50%' },
 
-  { id: 'sql', left: '36.3%', top: '50%' },
-  { id: 'csharp', left: '50%', top: '50%' },
-  { id: 'dotnet', left: '63.5%', top: '70.5%' },
+  { id: 'sql', left: '31.3%', top: '50%' },
+  { id: 'csharp', left: '42%', top: '50%' },
+  { id: 'dotnet', left: '53.5%', top: '73.5%' },
 
-  { id: 'docker', left: '63.5%', top: '30%' },
-  { id: 'react', left: '63.5%', top: '50%' },
-  { id: 'ts', left: '77%', top: '50%' },
+  { id: 'docker', left: '65%', top: '28%' },
+  { id: 'react', left: '53.5%', top: '50%' },
+  { id: 'ts', left: '65%', top: '50%' },
 
-  { id: 'azure', left: '77%', top: '70.5%' },
-  { id: 'n8n', left: '90.5%', top: '49.5%' },
+  { id: 'azure', left: '65.1%', top: '73.5%' },
+  { id: 'n8n', left: '74.5%', top: '49.5%' },
 ];
 
 const SkillTree = ({ onSelectSkill, activeSkill }) => {
