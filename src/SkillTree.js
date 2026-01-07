@@ -58,45 +58,6 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
       <div className="tree-board">
 
-        {/* ===== LINHAS ENERGIZADAS ===== */}
-        <svg
-          className="skill-tree-lines"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.2" />
-            </linearGradient>
-
-            <filter id="energyGlow">
-              <feGaussianBlur stdDeviation="1.6" />
-            </filter>
-          </defs>
-
-          {connections.map(([from, to], index) => {
-            const start = skillPositions.find(s => s.id === from);
-            const end = skillPositions.find(s => s.id === to);
-            if (!start || !end) return null;
-
-            return (
-              <line
-                key={index}
-                x1={percent(start.left)}
-                y1={percent(start.top)}
-                x2={percent(end.left)}
-                y2={percent(end.top)}
-                stroke="url(#energyGradient)"
-                strokeWidth="1.2"
-                className="skill-energy-line"
-                filter="url(#energyGlow)"
-              />
-            );
-          })}
-        </svg>
-
         {/* ===== BADGES ===== */}
         {skillPositions.map((pos) => {
           const skill = skillData.find(s => s.id === pos.id);
