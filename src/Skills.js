@@ -127,6 +127,60 @@ export const skills = [
     badge: "/images/badges/badgeazure.png"
   },
 
+ {
+    id: "docker",
+    name: "Docker",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgedocker.png"
+  },
+
+   {
+    id: "n8n",
+    name: "n8n",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgen8n.png"
+  },
+
+ {
+    id: "typescript",
+    name: "TypeScript",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgets/typescript.png"
+  },
+
   {
     id: "html",
     name: "HTML",
