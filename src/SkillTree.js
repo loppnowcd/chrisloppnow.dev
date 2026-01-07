@@ -2,9 +2,9 @@ import React from 'react';
 import './SkillTree.css';
 import { skills as skillData } from './Skills';
 
-// DICA: Use o "Inspecionar Elemento" do navegador para ajustar 
-// o 'left' e 'top' visualmente e depois copie os números para cá.
-
+/*
+  POSIÇÕES DAS SKILLS
+*/
 const skillPositions = [
   { id: 'html', left: '9.3%', top: '50%' },
   { id: 'css', left: '31.3%', top: '27%' },
@@ -23,38 +23,87 @@ const skillPositions = [
   { id: 'n8n', left: '74.5%', top: '49.5%' },
 ];
 
+/*
+  CONEXÕES ENTRE SKILLS (ÁRVORE LEVE)
+*/
+const connections = [
+  ['html', 'css'],
+  ['css', 'js'],
+  ['js', 'react'],
+  ['js', 'ts'],
+  ['sql', 'csharp'],
+  ['csharp', 'dotnet'],
+  ['react', 'ts'],
+  ['ts', 'azure'],
+];
+
 const SkillTree = ({ onSelectSkill, activeSkill }) => {
   return (
-    <div className={`skill-tree-container ${activeSkill ? 'dimmed' : ''}`}>
+    <div className={`skill-tree-container ${activeSkill ? 'has-active' : ''}`}>
       <h2 className="skill-tree-title">
         Habilidades Técnicas
       </h2>
 
       <div className="tree-board">
+
+        {/* 🔹 LINHAS DA SKILL TREE (FICAM ATRÁS DAS BADGES) */}
+        <svg
+          className="skill-tree-lines"
+          width="100%"
+          height="100%"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        >
+          {connections.map(([from, to], index) => {
+            const start = skillPositions.find(s => s.id === from);
+            const end = skillPositions.find(s => s.id === to);
+            if (!start || !end) return null;
+
+            return (
+              <line
+                key={index}
+                x1={start.left}
+                y1={start.top}
+                x2={end.left}
+                y2={end.top}
+                stroke="rgba(168, 85, 247, 0.25)"
+                strokeWidth="1"
+              />
+            );
+          })}
+        </svg>
+
+        {/* 🔹 BADGES */}
         {skillPositions.map((pos) => {
           const skill = skillData.find(s => s.id === pos.id);
-
-          // Caso ainda não exista no Skills.js, não renderiza
           if (!skill) return null;
+
+          const isActive = activeSkill?.id === skill.id;
+          const isInactive = activeSkill && !isActive;
 
           return (
             <div
               key={skill.id}
-              className={`skill-badge-wrapper ${
-              activeSkill?.id === skill.id ? 'active' : 'inactive'
-              }`}
-              style={{ left: pos.left, top: pos.top }}
+              className={`skill-badge-wrapper ${isActive ? 'active' : ''} ${isInactive ? 'inactive' : ''}`}
+              style={{
+                left: pos.left,
+                top: pos.top,
+                zIndex: 2
+              }}
               onClick={() => onSelectSkill(skill)}
-              >
-
+            >
               <div className="skill-badge-inner">
                 <img src={skill.badge} alt={skill.name} />
               </div>
-
-              {/* Tooltip removido — painel assume essa função */}
             </div>
           );
         })}
+
       </div>
     </div>
   );
