@@ -7,39 +7,43 @@ import { skills as skillData } from './Skills';
 */
 const skillPositions = [
   { id: 'html', left: '9.3%', top: '50%' },
-  { id: 'css', left: '31.3%', top: '27%' },
-  { id: 'js', left: '31.3%', top: '74%' },
   { id: 'git', left: '19.9%', top: '50%' },
 
+  { id: 'css', left: '31.3%', top: '27%' },
   { id: 'sql', left: '31.3%', top: '50%' },
+  { id: 'js', left: '31.3%', top: '74%' },
+
   { id: 'csharp', left: '42%', top: '50%' },
-  { id: 'dotnet', left: '53.5%', top: '73.5%' },
 
   { id: 'docker', left: '53.5%', top: '28%' },
   { id: 'react', left: '53.5%', top: '50%' },
-  { id: 'ts', left: '65%', top: '50%' },
+  { id: 'dotnet', left: '53.5%', top: '73.5%' },
 
+  { id: 'ts', left: '65%', top: '50%' },
   { id: 'azure', left: '65.1%', top: '73.5%' },
+
   { id: 'n8n', left: '74.5%', top: '49.5%' },
 ];
 
 /*
-  CONEXÕES ENTRE SKILLS
+  CONEXÕES (LINHAS RETAS)
 */
 const connections = [
-  { from: 'html', to: 'git', curve: 6 },
-  { from: 'git', to: 'css', curve: 8 },
-  { from: 'git', to: 'js', curve: -8 },
-  { from: 'git', to: 'sql', curve: 6 },
+  ['html', 'git'],
 
-  { from: 'sql', to: 'csharp', curve: 6 },
-  { from: 'csharp', to: 'react', curve: 10 },
-  { from: 'csharp', to: 'dotnet', curve: -8 },
-  { from: 'csharp', to: 'docker', curve: -10 },
+  ['git', 'css'],
+  ['git', 'sql'],
+  ['git', 'js'],
 
-  { from: 'dotnet', to: 'azure', curve: 6 },
-  { from: 'react', to: 'ts', curve: 6 },
-  { from: 'ts', to: 'n8n', curve: 6 },
+  ['sql', 'csharp'],
+
+  ['csharp', 'docker'],
+  ['csharp', 'react'],
+  ['csharp', 'dotnet'],
+
+  ['react', 'ts'],
+  ['dotnet', 'azure'],
+  ['ts', 'n8n'],
 ];
 
 /* "50%" -> 50 */
@@ -54,66 +58,40 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
       <div className="tree-board">
 
-        {/* ===== LINHAS DA SKILL TREE ===== */}
+        {/* ===== LINHAS ENERGIZADAS ===== */}
         <svg
           className="skill-tree-lines"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 1,
-            pointerEvents: 'none'
-          }}
         >
           <defs>
-
-            {/* GRADIENTE CORRIGIDO */}
-            <linearGradient
-              id="skillGradient"
-              gradientUnits="userSpaceOnUse"
-              x1="0"
-              y1="0"
-              x2="100"
-              y2="0"
-            >
+            <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#a855f7" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#ec4899" stopOpacity="0.2" />
             </linearGradient>
 
-            {/* GLOW SUAVE */}
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
+            <filter id="energyGlow">
+              <feGaussianBlur stdDeviation="1.6" />
             </filter>
-
           </defs>
 
-          {connections.map(({ from, to, curve }, index) => {
+          {connections.map(([from, to], index) => {
             const start = skillPositions.find(s => s.id === from);
             const end = skillPositions.find(s => s.id === to);
             if (!start || !end) return null;
 
             return (
-              <path
+              <line
                 key={index}
-                d={`
-                  M ${percent(start.left)} ${percent(start.top)}
-                  C
-                  ${percent(start.left) + curve} ${percent(start.top)},
-                  ${percent(end.left) - curve} ${percent(end.top)},
-                  ${percent(end.left)} ${percent(end.top)}
-                `}
-                fill="none"
-                stroke="url(#skillGradient)"
-                strokeWidth="0.7"
-                opacity="0.45"
-                filter="url(#glow)"
-                className="skill-connection"
+                x1={percent(start.left)}
+                y1={percent(start.top)}
+                x2={percent(end.left)}
+                y2={percent(end.top)}
+                stroke="url(#energyGradient)"
+                strokeWidth="1.2"
+                className="skill-energy-line"
+                filter="url(#energyGlow)"
               />
             );
           })}

@@ -119,3 +119,25 @@
   .skill-badge-wrapper { width: 13%; }
   .skill-tree-container { gap: 4vh; }
 }
+
+.skill-tree-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.skill-energy-line {
+  stroke-dasharray: 6 14;
+  animation: energy-flow 9s linear infinite;
+  stroke-linecap: round;
+}
+
+@keyframes energy-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -200;
+  }
+}
