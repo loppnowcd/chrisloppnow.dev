@@ -53,16 +53,6 @@ function App() {
               </a>
             </div>
 
-            {/* 🔹 BOTÃO TEMPORÁRIO DE TESTE (VAI SUMIR DEPOIS) */}
-            <div className="mt-8">
-              <button
-                onClick={() => setSelectedSkill(skills[0])}
-                className="border border-purple-500 text-purple-400 px-4 py-2 rounded hover:bg-purple-500 hover:text-black transition"
-              >
-                Testar SkillPanel
-              </button>
-            </div>
-
           </div>
         </div>
       </section>
