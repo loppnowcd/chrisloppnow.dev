@@ -164,7 +164,7 @@ export const skills = [
   },
 
  {
-    id: "typescript",
+    id: "ts",
     name: "TypeScript",
     level: "Intermediário",
     levelScore: 3,
