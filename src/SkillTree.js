@@ -15,7 +15,7 @@ const skillPositions = [
   { id: 'csharp', left: '42%', top: '50%' },
   { id: 'dotnet', left: '53.5%', top: '73.5%' },
 
-  { id: 'docker', left: '65%', top: '28%' },
+  { id: 'docker', left: '53.5%', top: '28%' },
   { id: 'react', left: '53.5%', top: '50%' },
   { id: 'ts', left: '65%', top: '50%' },
 
@@ -27,14 +27,17 @@ const skillPositions = [
   CONEXÕES ENTRE SKILLS (ÁRVORE LEVE)
 */
 const connections = [
-  ['html', 'css'],
-  ['css', 'js'],
-  ['js', 'react'],
-  ['js', 'ts'],
+  ['html', 'git'],
+  ['git', 'js'],
+  ['git', 'css'],
+  ['git', 'sql'],
   ['sql', 'csharp'],
   ['csharp', 'dotnet'],
+  ['csharp', 'react'],
+  ['csharp', 'docker'],
+  ['dotnet', 'azure'],
   ['react', 'ts'],
-  ['ts', 'azure'],
+  ['ts', 'n8n'],
 ];
 
 const SkillTree = ({ onSelectSkill, activeSkill }) => {
