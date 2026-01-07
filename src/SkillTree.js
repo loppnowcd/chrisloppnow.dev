@@ -27,18 +27,21 @@ const skillPositions = [
   CONEXÕES ENTRE SKILLS
 */
 const connections = [
-  ['html', 'git'],
-  ['git', 'css'],
-  ['git', 'js'],
-  ['git', 'sql'],
-  ['sql', 'csharp'],
-  ['csharp', 'dotnet'],
-  ['csharp', 'react'],
-  ['csharp', 'docker'],
-  ['dotnet', 'azure'],
-  ['react', 'ts'],
-  ['ts', 'n8n'],
+  { from: 'html', to: 'git', curve: 6 },
+  { from: 'git', to: 'css', curve: 8 },
+  { from: 'git', to: 'js', curve: 8 },
+  { from: 'git', to: 'sql', curve: 10 },
+
+  { from: 'sql', to: 'csharp', curve: 6 },
+  { from: 'csharp', to: 'dotnet', curve: 8 },
+  { from: 'csharp', to: 'react', curve: 10 },
+  { from: 'csharp', to: 'docker', curve: 10 },
+
+  { from: 'dotnet', to: 'azure', curve: 6 },
+  { from: 'react', to: 'ts', curve: 6 },
+  { from: 'ts', to: 'n8n', curve: 6 },
 ];
+
 
 /* "50%" -> 50 */
 const percent = (value) => parseFloat(value);
@@ -83,29 +86,30 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
             </filter>
           </defs>
 
-          {connections.map(([from, to], index) => {
-            const start = skillPositions.find(s => s.id === from);
-            const end = skillPositions.find(s => s.id === to);
-            if (!start || !end) return null;
+          {connections.map(({ from, to, curve }, index) => {
+  const start = skillPositions.find(s => s.id === from);
+  const end = skillPositions.find(s => s.id === to);
+  if (!start || !end) return null;
 
-            return (
-              <path
-                key={index}
-                d={`
-                  M ${percent(start.left)} ${percent(start.top)}
-                  C
-                  ${percent(start.left) + 6} ${percent(start.top)},
-                  ${percent(end.left) - 6} ${percent(end.top)},
-                  ${percent(end.left)} ${percent(end.top)}
-                `}
-                fill="none"
-                stroke="url(#skillGradient)"
-                strokeWidth="0.6"
-                opacity="0.45"
-                filter="url(#glow)"
-              />
-            );
-          })}
+  return (
+    <path
+      key={index}
+      d={`
+        M ${percent(start.left)} ${percent(start.top)}
+        C
+        ${percent(start.left) + curve} ${percent(start.top)},
+        ${percent(end.left) - curve} ${percent(end.top)},
+        ${percent(end.left)} ${percent(end.top)}
+      `}
+      fill="none"
+      stroke="url(#skillGradient)"
+      strokeWidth="0.6"
+      opacity="0.45"
+      filter="url(#glow)"
+    />
+  );
+})}
+
         </svg>
 
         {/* ===== BADGES ===== */}
