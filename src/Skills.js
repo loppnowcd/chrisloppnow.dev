@@ -178,7 +178,7 @@ export const skills = [
       "Landing page pessoal",
       "Projetos públicos (em breve)"
     ],
-    badge: "/images/badges/badgets/typescript.png"
+    badge: "/images/badges/badgets/badgetypescript.png"
   },
 
   {
