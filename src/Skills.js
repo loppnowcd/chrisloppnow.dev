@@ -37,6 +37,96 @@ export const skills = [
     badge: "/images/badges/badgegit.png"
   },
 
+ {
+    id: "sql",
+    name: "SQL",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgesql.png"
+  },
+
+ {
+    id: "csharp",
+    name: "C#",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgecsharp.png"
+  },
+
+ {
+    id: "dotnet",
+    name: ".NET",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgedotnet.png"
+  },
+
+   {
+    id: "react",
+    name: "React",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgereact.png"
+  },
+
+   {
+    id: "azure",
+    name: "Azure",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgeazure.png"
+  },
+
   {
     id: "html",
     name: "HTML",
