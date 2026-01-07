@@ -20,6 +20,24 @@ export const skills = [
   },
 
   {
+    id: "git",
+    name: "Git",
+    level: "Intermediário",
+    levelScore: 3,
+    description: [
+      "Criação de interações dinâmicas em páginas web",
+      "Manipulação de DOM e eventos",
+      "Consumo de APIs REST",
+      "Organização de lógica no frontend"
+    ],
+    evidence: [
+      "Landing page pessoal",
+      "Projetos públicos (em breve)"
+    ],
+    badge: "/images/badges/badgegit.png"
+  },
+
+  {
     id: "html",
     name: "HTML",
     level: "Intermediário",
