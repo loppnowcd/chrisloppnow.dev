@@ -2,58 +2,40 @@
 
 .skill-tree-container {
   width: 100%;
-  height: 100%; /* Ocupa a tela toda (h-screen do pai) */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  /* ALINHAMENTO VERTICAL */
-  /* 'center' agrupa tudo no meio. Com o 'gap' abaixo, criamos o respiro. */
-  justify-content: center; 
-  
-  /* Isso empurra o título pra cima e a árvore pra baixo, criando o espaço ideal */
-  gap: 6vh; 
-  
+  justify-content: center;
+  gap: 6vh;
   padding: 20px;
   pointer-events: auto;
 }
 
-
-/* --- ESTILO "HERO" (Igual ao App.js) --- */
+/* --- TÍTULO --- */
 .skill-tree-title {
-  /* Tamanho: Um pouco menor que o 5xl/7xl (que seria ~4.5rem), mas ainda grande */
-  font-size: 3.5rem; 
-  font-weight: 700; /* font-bold */
+  font-size: 3.5rem;
+  font-weight: 700;
   text-align: center;
-  
-  /* A MÁGICA DO GRADIENTE (Tailwind Translation) */
-  /* from-purple-400 (#c084fc) via-purple-500 (#a855f7) to-pink-500 (#ec4899) */
   background: linear-gradient(to right, #c084fc, #a855f7, #ec4899);
-  
-  /* Corta o fundo no formato do texto */
   -webkit-background-clip: text;
   background-clip: text;
-  
-  /* Deixa o texto transparente para o fundo aparecer */
-  color: transparent; 
+  color: transparent;
   -webkit-text-fill-color: transparent;
-
-  /* Removemos margens manuais pois o container usa 'gap' agora */
   margin: 0;
-  
-  /* Garante a fonte do sistema */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* --- O RESTO CONTINUA IGUAL --- */
-
+/* --- ÁREA DA ÁRVORE --- */
 .tree-board {
   position: relative;
   width: 100%;
   height: 100%;
-  background: transparent; /* 🔥 fundo morto */
+  background: transparent;
 }
 
+/* --- BADGES --- */
 .skill-badge-wrapper {
   position: absolute;
   width: 8.8%;
@@ -68,8 +50,7 @@
 
 .skill-badge-inner {
   transform: scale(0.9);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  box-shadow: none;
+  transition: transform 0.25s ease;
 }
 
 .skill-badge-inner img {
@@ -77,50 +58,49 @@
   height: 100%;
   object-fit: contain;
   filter: none;
-  transition: all 0.3s ease;
+  transition: filter 0.25s ease, transform 0.25s ease;
 }
 
-
-.skill-badge-wrapper {
-  cursor: pointer;
-}
-
-/* Hover só funciona quando não há skill ativa */
-.skill-tree-container:not(.has-active) 
+/* --- HOVER (só quando não há ativa) --- */
+.skill-tree-container:not(.has-active)
 .skill-badge-wrapper:hover img {
-  filter: grayscale(0%) brightness(1.1) contrast(1)
-    drop-shadow(0 0 15px rgba(192, 132, 252, 0.9))
-    drop-shadow(0 0 30px rgba(236, 72, 153, 0.7));
+  filter:
+    brightness(1.15)
+    saturate(1.15)
+    drop-shadow(0 0 14px rgba(192, 132, 252, 0.9))
+    drop-shadow(0 0 26px rgba(236, 72, 153, 0.75));
+  transform: scale(1.05);
 }
 
-/* Quando existe skill ativa, apagar o resto */
+/* --- INATIVAS (quando existe ativa) --- */
 .skill-badge-wrapper.inactive img {
-  filter: grayscale(50%) brightness(0.75) contrast(1);
+  filter: grayscale(45%) brightness(0.8) contrast(1);
+  opacity: 0.6;
 }
 
-/* Skill ativa permanece destacada */
+/* --- ATIVA (AQUI ESTÁ A CORREÇÃO IMPORTANTE) --- */
 .skill-badge-wrapper.active img {
   filter:
-    grayscale(0%)
-    brightness(1.25)
-    contrast(1.15)
-    saturate(1.25)
-    drop-shadow(0 0 22px rgba(168, 85, 247, 1))
-    drop-shadow(0 0 40px rgba(236, 72, 153, 0.9));
-  transform: scale(1.08);
+    brightness(1.45)          /* 🔥 luz interna forte */
+    contrast(1.2)
+    saturate(1.35)            /* 🔥 cor viva */
+    drop-shadow(0 0 26px rgba(168, 85, 247, 1))
+    drop-shadow(0 0 48px rgba(236, 72, 153, 0.95));
+  transform: scale(1.12);
 }
 
-/* Remove hover das inativas quando há ativa */
+/* Evita hover interferir nas inativas */
 .skill-badge-wrapper.inactive:hover img {
-  filter: grayscale(40%) brightness(0.7) contrast(1.2);
+  filter: grayscale(45%) brightness(0.8) contrast(1);
 }
 
+/* --- RESPONSIVO --- */
 @media (max-width: 1400px) {
-    .skill-tree-title { font-size: 2.5rem; }
+  .skill-tree-title { font-size: 2.5rem; }
 }
 
 @media (max-width: 768px) {
   .skill-tree-title { font-size: 2rem; }
   .skill-badge-wrapper { width: 13%; }
-  .skill-tree-container { gap: 4vh; } /* Menos espaço no celular */
+  .skill-tree-container { gap: 4vh; }
 }
