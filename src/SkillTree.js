@@ -54,17 +54,19 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
         {/* 🔹 LINHAS (ENERGIA / FLUXO) */}
         <svg
-          className="skill-tree-lines"
-          width="100%"
-          height="100%"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 1,
-            pointerEvents: 'none'
-          }}
-        >
+        className="skill-tree-lines"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
+        pointerEvents: 'none'
+        }}
+>
 
           {/* DEFINIÇÕES VISUAIS DO SVG */}
           <defs>
