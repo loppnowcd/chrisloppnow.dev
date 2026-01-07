@@ -3,7 +3,7 @@ import './SkillTree.css';
 import { skills as skillData } from './Skills';
 
 /*
-  POSIÇÕES DAS SKILLS
+  POSIÇÕES DAS SKILLS (em % do board)
 */
 const skillPositions = [
   { id: 'html', left: '9.3%', top: '50%' },
@@ -40,7 +40,7 @@ const connections = [
   ['ts', 'n8n'],
 ];
 
-/* Utilitário: "50%" -> 50 */
+/* "50%" -> 50 */
 const percent = (value) => parseFloat(value);
 
 const SkillTree = ({ onSelectSkill, activeSkill }) => {
@@ -52,23 +52,21 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
       <div className="tree-board">
 
-        {/* 🔹 LINHAS (ENERGIA / FLUXO) */}
+        {/* ===== LINHAS DA SKILL TREE ===== */}
         <svg
-        className="skill-tree-lines"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 1,
-        pointerEvents: 'none'
-        }}
->
-
-          {/* DEFINIÇÕES VISUAIS DO SVG */}
+          className="skill-tree-lines"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          width="100%"
+          height="100%"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        >
           <defs>
             <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#a855f7" stopOpacity="0.25" />
@@ -85,7 +83,6 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
             </filter>
           </defs>
 
-          {/* DESENHO DAS CONEXÕES */}
           {connections.map(([from, to], index) => {
             const start = skillPositions.find(s => s.id === from);
             const end = skillPositions.find(s => s.id === to);
@@ -93,25 +90,25 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
             return (
               <path
-  key={index}
-  d={`
-    M ${percent(start.left)} ${percent(start.top)}
-    C
-    ${percent(start.left) + 6} ${percent(start.top)},
-    ${percent(end.left) - 6} ${percent(end.top)},
-    ${percent(end.left)} ${percent(end.top)}
-  `}
-  fill="none"
-  stroke="url(#skillGradient)"
-  strokeWidth="0.6"
-  opacity="0.45"
-  filter="url(#glow)"
-/>
+                key={index}
+                d={`
+                  M ${percent(start.left)} ${percent(start.top)}
+                  C
+                  ${percent(start.left) + 6} ${percent(start.top)},
+                  ${percent(end.left) - 6} ${percent(end.top)},
+                  ${percent(end.left)} ${percent(end.top)}
+                `}
+                fill="none"
+                stroke="url(#skillGradient)"
+                strokeWidth="0.6"
+                opacity="0.45"
+                filter="url(#glow)"
+              />
             );
           })}
         </svg>
 
-        {/* 🔹 BADGES */}
+        {/* ===== BADGES ===== */}
         {skillPositions.map((pos) => {
           const skill = skillData.find(s => s.id === pos.id);
           if (!skill) return null;
