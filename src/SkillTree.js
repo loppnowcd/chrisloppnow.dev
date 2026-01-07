@@ -24,12 +24,12 @@ const skillPositions = [
 ];
 
 /*
-  CONEXÕES ENTRE SKILLS (ÁRVORE LEVE)
+  CONEXÕES ENTRE SKILLS
 */
 const connections = [
   ['html', 'git'],
-  ['git', 'js'],
   ['git', 'css'],
+  ['git', 'js'],
   ['git', 'sql'],
   ['sql', 'csharp'],
   ['csharp', 'dotnet'],
@@ -40,6 +40,9 @@ const connections = [
   ['ts', 'n8n'],
 ];
 
+/* Utilitário: "50%" -> 50 */
+const percent = (value) => parseFloat(value);
+
 const SkillTree = ({ onSelectSkill, activeSkill }) => {
   return (
     <div className={`skill-tree-container ${activeSkill ? 'has-active' : ''}`}>
@@ -49,7 +52,7 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
 
       <div className="tree-board">
 
-        {/* 🔹 LINHAS DA SKILL TREE (FICAM ATRÁS DAS BADGES) */}
+        {/* 🔹 LINHAS (ENERGIA / FLUXO) */}
         <svg
           className="skill-tree-lines"
           width="100%"
@@ -62,20 +65,45 @@ const SkillTree = ({ onSelectSkill, activeSkill }) => {
             pointerEvents: 'none'
           }}
         >
+
+          {/* DEFINIÇÕES VISUAIS DO SVG */}
+          <defs>
+            <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.25" />
+              <stop offset="50%" stopColor="#c084fc" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.25" />
+            </linearGradient>
+
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* DESENHO DAS CONEXÕES */}
           {connections.map(([from, to], index) => {
             const start = skillPositions.find(s => s.id === from);
             const end = skillPositions.find(s => s.id === to);
             if (!start || !end) return null;
 
             return (
-              <line
+              <path
                 key={index}
-                x1={start.left}
-                y1={start.top}
-                x2={end.left}
-                y2={end.top}
-                stroke="rgba(168, 85, 247, 0.25)"
-                strokeWidth="1"
+                d={`
+                  M ${percent(start.left)}% ${percent(start.top)}%
+                  C
+                  ${percent(start.left) + 6}% ${percent(start.top)}%,
+                  ${percent(end.left) - 6}% ${percent(end.top)}%,
+                  ${percent(end.left)}% ${percent(end.top)}%
+                `}
+                fill="none"
+                stroke="url(#skillGradient)"
+                strokeWidth="1.2"
+                opacity="0.4"
+                filter="url(#glow)"
               />
             );
           })}
